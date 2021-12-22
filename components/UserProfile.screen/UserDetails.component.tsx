@@ -1,53 +1,55 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../../contexts/UserContext'
-import { SafeAreaView, Text, Pressable, View, Image } from 'react-native'
-import { styles } from './UserDetails.style'
-import { MyHostedEvents } from './MyHostedEvents.component'
-import { ScrollView } from 'react-native-gesture-handler'
-import { MyJoinedEvents } from './MyJoinedEvents.component'
-import { getDownloadURL, ref } from 'firebase/storage'
-import { db, storage } from '../../utils/firestoreConfig'
-import { doc, onSnapshot } from '@firebase/firestore'
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import { SafeAreaView, Text, Pressable, View, Image } from "react-native";
+import { styles } from "./UserDetails.style";
+import { MyHostedEvents } from "./MyHostedEvents.component";
+import { ScrollView } from "react-native-gesture-handler";
+import { MyJoinedEvents } from "./MyJoinedEvents.component";
+import { getDownloadURL, ref } from "firebase/storage";
+import { db, storage } from "../../utils/firestoreConfig";
+import { doc, onSnapshot } from "@firebase/firestore";
 
-export const UserDetails = ({ navigation }) => {
-  const { currentUser } = useContext(UserContext)
-  const [currentUserObject, setCurrentUserObject] = useState({ ...currentUser })
-  const [currentDetails, setCurrentDetails] = useState({ ...currentUser })
-  const [isLoading, setIsLoading] = useState(true)
-  const [imgURL, setImgURL] = useState('')
+export const UserDetails = ({ navigation }: any) => {
+  const { currentUser } = useContext(UserContext);
+  const [currentUserObject, setCurrentUserObject] = useState({
+    ...currentUser,
+  });
+  const [currentDetails, setCurrentDetails] = useState({ ...currentUser });
+  const [isLoading, setIsLoading] = useState(true);
+  const [imgURL, setImgURL] = useState("");
 
   //Storage Ref for IMG file
-  const storageRef = ref(storage, currentUser.image_bitmap)
+  const storageRef = ref(storage, currentUser.image_bitmap);
 
   useEffect(() => {
     //firebase storage request for IMG file
     try {
       getDownloadURL(storageRef)
         .then((res) => {
-          setImgURL(res)
+          setImgURL(res);
         })
         .catch((err) => {
-          console.log(err)
-        })
+          console.log(err);
+        });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
     const profileDisplayDetails = {
       first_name: currentUserObject.first_name,
       last_name: currentUserObject.last_name,
       description: currentUserObject.description,
-    }
-    setCurrentDetails(profileDisplayDetails)
-  }, [imgURL, currentUserObject])
+    };
+    setCurrentDetails(profileDisplayDetails);
+  }, [imgURL, currentUserObject]);
 
   React.useEffect(() => {
-    setIsLoading(true)
-    const unsub = onSnapshot(doc(db, 'users', currentUser.id), (doc: any) => {
-      setCurrentUserObject(doc.data())
-    })
-  }, [currentUser.id])
+    setIsLoading(true);
+    const unsub = onSnapshot(doc(db, "users", currentUser.id), (doc: any) => {
+      setCurrentUserObject(doc.data());
+    });
+  }, [currentUser.id]);
 
-  if (isLoading) <Text>Loading details ...</Text>
+  if (isLoading) <Text>Loading details ...</Text>;
   return (
     <SafeAreaView style={styles.page}>
       <ScrollView>
@@ -66,13 +68,13 @@ export const UserDetails = ({ navigation }) => {
             style={({ pressed }) => [
               {
                 backgroundColor: pressed
-                  ? 'rgba(50, 59, 118, 0.5)'
-                  : 'rgba(50, 59, 118, 1)',
+                  ? "rgba(50, 59, 118, 0.5)"
+                  : "rgba(50, 59, 118, 1)",
               },
               styles.editButton,
             ]}
             onPress={() => {
-              navigation.navigate('Edit Profile')
+              navigation.navigate("Edit Profile");
             }}
           >
             <Text style={styles.buttonTitle}>Edit Details</Text>
@@ -82,5 +84,5 @@ export const UserDetails = ({ navigation }) => {
         <MyJoinedEvents user_id={currentUser.id} navigation={navigation} />
       </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};

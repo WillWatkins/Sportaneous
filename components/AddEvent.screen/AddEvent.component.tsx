@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import {
   TextInput,
@@ -16,8 +16,8 @@ import {
   addNewChatroom,
   addNewEventToCurrentUserProfile,
 } from "../../utils/utils";
-import {UserContext} from "../../contexts/UserContext";
-import {styles} from "./AddEvent.style";
+import { UserContext } from "../../contexts/UserContext";
+import { styles } from "./AddEvent.style";
 
 type AddEventProps = {
   navigation: {
@@ -25,8 +25,8 @@ type AddEventProps = {
   };
 };
 
-export const AddEvent = ({navigation}: AddEventProps) => {
-  const {currentUser} = useContext(UserContext);
+export const AddEvent = ({ navigation }: AddEventProps) => {
+  const { currentUser } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -72,12 +72,12 @@ export const AddEvent = ({navigation}: AddEventProps) => {
       pending_attendees: [],
     });
     addNewChatroom(
-      {host_id: currentUser.id, attendees_id: [], messages: []},
+      { host_id: currentUser.id, attendees_id: [], messages: [] },
       eventId
     );
     addNewEventToCurrentUserProfile(currentUser.id, eventId);
     resetEventData();
-    navigation.navigate("Event", {eventId});
+    navigation.navigate("Event", { eventId });
   };
 
   const isDisabled = !(
@@ -101,30 +101,35 @@ export const AddEvent = ({navigation}: AddEventProps) => {
                 onChangeText={setTitle}
                 value={title}
                 placeholder="title"
+                placeholderTextColor="grey"
               />
               <TextInput
                 style={styles.inputField}
                 onChangeText={setCategory}
                 value={category}
                 placeholder="category"
+                placeholderTextColor="grey"
               />
               <TextInput
                 style={styles.inputField}
                 onChangeText={setDescription}
                 value={description}
                 placeholder="description"
+                placeholderTextColor="grey"
               />
               <TextInput
                 style={styles.inputField}
                 onChangeText={setLocation}
                 value={location}
                 placeholder="city"
+                placeholderTextColor="grey"
               />
               <TextInput
                 style={styles.inputField}
                 onChangeText={setMaxCapacity}
                 value={maxCapacity}
                 placeholder="how many people can join?"
+                placeholderTextColor="grey"
               />
             </View>
           </TouchableWithoutFeedback>
@@ -146,6 +151,7 @@ export const AddEvent = ({navigation}: AddEventProps) => {
             mode={"date"}
             display="default"
             onChange={changeSelectedDate}
+            style={styles.picker}
           />
         )}
         <View style={styles.datetime}>
@@ -166,6 +172,7 @@ export const AddEvent = ({navigation}: AddEventProps) => {
             is24Hour={true}
             display="default"
             onChange={changeSelectedTime}
+            style={styles.picker}
           />
         )}
         <View style={styles.post}>

@@ -1,11 +1,11 @@
-import {StyleSheet, Dimensions} from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 const windowWidth = Dimensions.get("window").width;
 
 export const styles = StyleSheet.create({
   page: {
     flex: 1,
-    marginBottom: 60
+    marginBottom: 60,
   },
   avatar: {
     borderRadius: 100,

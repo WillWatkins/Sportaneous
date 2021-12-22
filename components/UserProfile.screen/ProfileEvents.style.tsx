@@ -1,4 +1,4 @@
-import {StyleSheet, Dimensions} from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -63,13 +63,12 @@ export const styles = StyleSheet.create({
     textTransform: "capitalize",
     width: windowWidth / 2,
   },
-  time: {textAlign: "right", fontSize: 18, width: windowWidth / 2},
-  user: {textAlign: "right", fontSize: 18, width: windowWidth / 3},
+  time: { textAlign: "right", fontSize: 18, width: windowWidth / 2 },
+  user: { textAlign: "right", fontSize: 18, width: windowWidth / 3 },
   description: {
     fontSize: 15,
-    width: windowWidth,
+    width: windowWidth * 0.9,
     marginTop: 5,
-    marginLeft: 15,
   },
   category: {
     textAlign: "left",
