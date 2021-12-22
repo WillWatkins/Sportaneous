@@ -58,7 +58,7 @@ export function checkAcceptedOrRequested(
 
 export function deleteEventAndCascade(
   eventId: string,
-  { navigation }: addEventProps,
+  { navigation }: props,
   userId: string,
   eventDetails: eventDetails
 ) {
