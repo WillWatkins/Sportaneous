@@ -1,9 +1,9 @@
 import { styles } from "./EventInfo.style";
 import { Text, View } from "react-native";
 import React from "react";
-import { addEventProps } from "../../singleEvent.utils";
+import { props } from "../../singleEvent.utils";
 
-export const EventInfo = ({ eventDetails }: addEventProps) => {
+export const EventInfo = ({ eventDetails }: props) => {
   return (
     <View style={styles.eventView}>
       <Text style={styles.title}>{eventDetails?.title}</Text>

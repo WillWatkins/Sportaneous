@@ -6,7 +6,7 @@ import { getUserById, joinEvent, removeSelfFromEvent } from "../../utils/utils";
 import {
   checkAcceptedOrRequested,
   deleteEventAndCascade,
-  addEventProps,
+  props,
   hostDetails,
   eventDetails,
   checkCapacity,
@@ -17,7 +17,7 @@ import { db } from "../../utils/firestoreConfig";
 import { EventInfo } from "./subcomponents/EventInfo/EventInfo.component";
 import { HostInfo } from "./subcomponents/HostInfo/HostInfo.component";
 
-export const SingleEvent = ({ navigation, route }: addEventProps) => {
+export const SingleEvent = ({ navigation, route }: props) => {
   let { eventId } = route!.params;
   const { currentUser } = useContext(UserContext);
 

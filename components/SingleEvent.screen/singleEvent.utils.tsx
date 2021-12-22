@@ -9,7 +9,7 @@ export type navigationWithEventId = {
   eventId: string;
 };
 
-export type addEventProps = {
+export type props = {
   navigation?: {
     navigate: (component: string, event_id?: navigationWithEventId) => {};
   };

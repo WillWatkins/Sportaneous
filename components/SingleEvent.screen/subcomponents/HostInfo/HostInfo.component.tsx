@@ -1,10 +1,10 @@
 import { View, Text, Image } from "react-native";
 import { styles } from "./HostInfo.style";
 import React, { useEffect, useState } from "react";
-import { addEventProps } from "../../singleEvent.utils";
+import { props } from "../../singleEvent.utils";
 import { getUserById } from "../../../../utils/utils";
 
-export const HostInfo = ({ hostDetails }: addEventProps) => {
+export const HostInfo = ({ hostDetails }: props) => {
   const [imgURL, setImgURL] = useState("");
   useEffect(() => {
     if (hostDetails?.id !== "") {
