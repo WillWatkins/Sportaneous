@@ -129,7 +129,13 @@ export const AddEvent = ({ navigation }: AddEventProps) => {
                 itemStyle={styles.catPicker}
               >
                 {pickerCategories.map((category) => {
-                  return <Picker.Item label={category} value={category} />;
+                  return (
+                    <Picker.Item
+                      label={category}
+                      value={category}
+                      key={category}
+                    />
+                  );
                 })}
               </Picker>
             </View>

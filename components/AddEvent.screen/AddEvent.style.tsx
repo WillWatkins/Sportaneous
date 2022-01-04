@@ -14,7 +14,6 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     backgroundColor: "#323B76",
     padding: 30,
-    textTransform: "uppercase",
     width: windowWidth / 1,
   },
   inputContainer: {
@@ -64,7 +63,8 @@ export const styles = StyleSheet.create({
   },
   pickerText: { textAlign: "left", color: "grey", alignSelf: "center" },
   picker: {
-    width: 100,
+    width: 200,
+    height: 45,
   },
   post: {
     alignItems: "center",
