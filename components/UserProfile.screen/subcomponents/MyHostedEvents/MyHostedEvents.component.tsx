@@ -1,19 +1,19 @@
-import {doc, onSnapshot} from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import React from "react";
-import {useContext} from "react";
-import {useEffect, useState} from "react";
-import {Text, Pressable, View, TouchableOpacity, Alert} from "react-native";
+import { useContext } from "react";
+import { useEffect, useState } from "react";
+import { Text, Pressable, View, TouchableOpacity, Alert } from "react-native";
 import Collapsible from "react-native-collapsible";
-import {ScrollView} from "react-native-gesture-handler";
-import {UserContext} from "../../contexts/UserContext";
-import {db} from "../../utils/firestoreConfig";
-import {selectEventById} from "../../utils/utils";
-import {truncate} from "../Events.screen/utils/EventListUtils";
-import {styles} from "./ProfileEvents.style";
-import {confirmDelete} from "./ProfileUtils";
+import { ScrollView } from "react-native-gesture-handler";
+import { UserContext } from "../../../../contexts/UserContext";
+import { db } from "../../../../utils/firestoreConfig";
+import { selectEventById } from "../../../../utils/utils";
+import { truncate } from "../../../Events.screen/utils/EventListUtils";
+import { styles } from "../../ProfileEvents.style";
+import { confirmDelete } from "../../../../utils/ProfileUtils";
 
-export const MyHostedEvents = ({user_id, navigation}) => {
-  const {currentUser} = useContext(UserContext);
+export const MyHostedEvents = ({ user_id, navigation }) => {
+  const { currentUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
   const [hostedIsCollapsed, setHostedIsCollapsed] = useState(false);
   const [myHostedEventIds, setMyHostedEventIds] = useState([]);
@@ -93,7 +93,7 @@ export const MyHostedEvents = ({user_id, navigation}) => {
                 <TouchableOpacity
                   style={styles.item}
                   onPress={() => {
-                    navigation.navigate("Event", {eventId: myEvent.id});
+                    navigation.navigate("Event", { eventId: myEvent.id });
                   }}
                 >
                   <Text style={styles.title}>{myEvent.title}</Text>
@@ -109,7 +109,7 @@ export const MyHostedEvents = ({user_id, navigation}) => {
                   </Text>
                 </TouchableOpacity>
                 <Pressable
-                  style={({pressed}) => [
+                  style={({ pressed }) => [
                     {
                       backgroundColor: pressed
                         ? "rgba(50, 59, 118, 0.5)"
@@ -127,7 +127,7 @@ export const MyHostedEvents = ({user_id, navigation}) => {
                   <Text style={styles.buttonTitle}>Pending Requests</Text>
                 </Pressable>
                 <Pressable
-                  style={({pressed}) => [
+                  style={({ pressed }) => [
                     {
                       backgroundColor: pressed
                         ? "rgba(108, 93, 171, 0.5)"
@@ -136,7 +136,7 @@ export const MyHostedEvents = ({user_id, navigation}) => {
                     styles.deleteButton,
                   ]}
                   onPress={() => {
-                    confirmDelete(myEvent.id, {navigation}, user_id, myEvent);
+                    confirmDelete(myEvent.id, { navigation }, user_id, myEvent);
                   }}
                 >
                   <Text style={styles.buttonTitle}>Delete Event</Text>
