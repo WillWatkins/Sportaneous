@@ -1,5 +1,12 @@
-import { View, Text, Pressable, Button } from "react-native";
-import React, { useContext } from "react";
+import {
+  View,
+  Text,
+  Pressable,
+  Button,
+  Dimensions,
+  ScrollView,
+} from "react-native";
+import React, { useContext, useEffect, useState } from "react";
 import { styles } from "./chat.style";
 import { FlatList, TextInput } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -7,7 +14,7 @@ import { addChatMessage, deleteChatMessage } from "../../utils/utils";
 import { db } from "../../utils/firestoreConfig";
 import { doc, onSnapshot } from "firebase/firestore";
 import { UserContext } from "../../contexts/UserContext";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useKeyboard } from "@react-native-community/hooks";
 
 export const Chat = ({ route, navigation }) => {
   const { chat_id, eventName } = route.params;
@@ -16,14 +23,17 @@ export const Chat = ({ route, navigation }) => {
   const [messages, setMessages] = React.useState([]);
   const [text, setText] = React.useState("");
   const [isMessagesEmpty, setIsMessagesEmpty] = React.useState(true);
+  const windowHeight = Dimensions.get("window").height;
+  const keyboard = useKeyboard();
 
   React.useEffect(() => {
     setMessages([]);
     const unsub = onSnapshot(doc(db, "chats", chat_id), (doc) => {
       if (doc.data().messages.length > 0) {
-        setIsMessagesEmpty(false);
         setMessages(doc.data().messages);
+        setIsMessagesEmpty(false);
       } else {
+        setMessages([]);
         setIsMessagesEmpty(true);
       }
     });
@@ -99,25 +109,36 @@ export const Chat = ({ route, navigation }) => {
     });
   }, [navigation]);
 
+  const [size, setSize] = useState(windowHeight);
+  useEffect(() => {
+    keyboard.keyboardShown
+      ? setSize(windowHeight * 0.78 - keyboard.keyboardHeight)
+      : setSize(windowHeight * 0.78);
+    setSize;
+  }, [keyboard.keyboardShown]);
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>{eventName}</Text>
-      <KeyboardAwareScrollView contentContainerStyle={styles.spacing}>
-        {isMessagesEmpty ? (
-          <Text style={styles.noMessages}>No messages</Text>
-        ) : null}
-        <FlatList
-          data={messages}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          extraData={selectedId}
-        />
+      <View style={{ height: size }}>
+        <ScrollView contentContainerStyle={[styles.spacing]}>
+          {isMessagesEmpty ? (
+            <Text style={styles.noMessages}>No messages</Text>
+          ) : null}
+          <FlatList
+            data={messages}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            extraData={selectedId}
+          />
+        </ScrollView>
         <View style={styles.sendMessagecontainer}>
           <TextInput
             style={styles.inputMessage}
             placeholder="Message..."
             placeholderTextColor={"black"}
             onChangeText={setText}
+            multiline={true}
             value={text}
           ></TextInput>
           <Pressable
@@ -136,11 +157,12 @@ export const Chat = ({ route, navigation }) => {
                 });
               }
             }}
+            style={styles.sendContainer}
           >
             <Text style={styles.sendText}>SEND</Text>
           </Pressable>
         </View>
-      </KeyboardAwareScrollView>
+      </View>
     </SafeAreaView>
   );
 };
