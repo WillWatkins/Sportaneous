@@ -1,12 +1,18 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import { FlatList, SafeAreaView, Text, TouchableOpacity, Image } from "react-native";
+import {
+  FlatList,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import { selectAllEvents, getUsers } from "../../utils/utils";
 import { makeNameIdReference } from "../Events.screen/utils/EventListUtils";
 import styles from "./Chatroom.style";
 
 const Chatroom = ({ navigation }) => {
-  const { currentUser } = useContext(UserContext)
+  const { currentUser } = useContext(UserContext);
   const [selectedId, setSelectedId] = useState(null);
   const [events, setEvents] = React.useState();
   const [userNames, setUserNames] = React.useState({});
@@ -14,19 +20,18 @@ const Chatroom = ({ navigation }) => {
   useEffect(() => {
     selectAllEvents().then((res) => {
       const filteredEvents = res.filter((event: any) => {
-        let attendeeList = event.attendees
-        let returnValue = false
-        console.log(attendeeList)
-        if(attendeeList.length > 0) {
-          if(event.host_id === currentUser.id) {
-            returnValue = true
+        let attendeeList = event.attendees;
+        let returnValue = false;
+        if (attendeeList.length > 0) {
+          if (event.host_id === currentUser.id) {
+            returnValue = true;
           }
           attendeeList.forEach((personDetails) => {
-            if(personDetails.userId === currentUser.id) {
-              returnValue = true
+            if (personDetails.userId === currentUser.id) {
+              returnValue = true;
             }
-          })
-          return returnValue
+          });
+          return returnValue;
         }
       });
       setEvents(filteredEvents);
