@@ -6,16 +6,12 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 140,
   },
   title: {
     color: "#FFF",
     fontSize: 18,
     textAlign: "center",
     fontWeight: "bold",
-    marginBottom: 30,
     backgroundColor: "#323B76",
     padding: 30,
     textTransform: "uppercase",
@@ -60,7 +56,7 @@ export const styles = StyleSheet.create({
   },
   capacityPicker: {
     height: 45,
-    width: 100,
+    width: 80,
     backgroundColor: "#FFF",
     borderRadius: 5,
     fontSize: 18,

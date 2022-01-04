@@ -105,11 +105,11 @@ export const AddEvent = ({ navigation }: AddEventProps) => {
   const pickerCategories = Object.keys(categories);
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <Text style={styles.title}>please fill the details</Text>
+      <ScrollView style={{ backgroundColor: "red" }}>
         <KeyboardAvoidingView>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.inputContainer}>
-              <Text style={styles.title}>please fill the details</Text>
               <TextInput
                 style={styles.inputField}
                 onChangeText={setTitle}
