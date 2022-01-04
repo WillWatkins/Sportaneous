@@ -118,69 +118,41 @@ export const AcceptReject = ({ route, navigation }) => {
     return <AttendeesItem item={item} />;
   };
 
-  const renderBoth = ({ item }) => {
-    return (
-      <AttendeesItem item={item} /> && <PendingAttendeesItem item={item} />
-    );
-  };
-
-  if (pendingUsers.length === 0 && attendingUsers.length === 0) {
-    return (
-      <SafeAreaView>
-        <TouchableOpacity
-          onPress={() => {
-            navigation!.navigate("Profile");
-          }}
-          style={styles.backButton}
-        >
-          <Text style={styles.backButtonText}>Go back to events</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>{eventTitle}</Text>
-        <Text>You don't have any join requests.</Text>
-      </SafeAreaView>
-    );
-  } else if (pendingUsers.length === 0) {
-    return (
-      <SafeAreaView style={styles.title}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation!.navigate("Profile");
-          }}
-          style={styles.backButton}
-        >
-          <Text style={styles.backButtonText}>Go to my events</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>{eventTitle}</Text>
-        <FlatList
-          data={attendingUsers}
-          renderItem={renderAttendingItem}
-          keyExtractor={(item) => item.id}
-        />
-      </SafeAreaView>
-    );
-  } else {
-    return (
-      <SafeAreaView>
-        <TouchableOpacity
-          onPress={() => {
-            navigation!.navigate("Profile");
-          }}
-          style={styles.backButton}
-        >
-          <Text style={styles.backButtonText}>back to profile</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>{eventTitle}</Text>
-        <FlatList
-          data={pendingUsers}
-          renderItem={renderBoth}
-          keyExtractor={(item) => item.id}
-        />
-        <FlatList
-          data={attendingUsers}
-          renderItem={renderAttendingItem}
-          keyExtractor={(item) => item.id}
-        />
-      </SafeAreaView>
-    );
-  }
+  return (
+    <SafeAreaView>
+      <TouchableOpacity
+        onPress={() => {
+          navigation!.navigate("Profile");
+        }}
+        style={styles.backButton}
+      >
+        <Text style={styles.backButtonText}>To my profile</Text>
+      </TouchableOpacity>
+      <Text style={styles.title}>{eventTitle}</Text>
+      {attendingUsers.length > 0 ? (
+        <>
+          <Text>Attending:</Text>
+          <FlatList
+            data={attendingUsers}
+            renderItem={renderAttendingItem}
+            keyExtractor={(item) => item.id}
+          />
+        </>
+      ) : (
+        <Text style={styles.text}>Accepted users will appear here!</Text>
+      )}
+      {pendingUsers.length > 0 ? (
+        <>
+          <Text>Requested:</Text>
+          <FlatList
+            data={pendingUsers}
+            renderItem={renderPendingItem}
+            keyExtractor={(item) => item.id}
+          />
+        </>
+      ) : (
+        <Text style={styles.text}>Requested users will appear here!</Text>
+      )}
+    </SafeAreaView>
+  );
 };
