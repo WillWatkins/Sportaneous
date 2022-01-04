@@ -1,13 +1,12 @@
-import { StyleSheet } from "react-native";
-import { Dimensions } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
+
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
+    height: windowHeight,
     backgroundColor: "#323B76",
-    paddingBottom: 80,
   },
   item: {
     backgroundColor: "#FFF",
@@ -30,7 +29,7 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: "#323B76",
     textTransform: "uppercase",
-    width: windowWidth * 0.95,
+    width: windowWidth,
   },
   hidden: {},
   topRowContainer: { justifyContent: "space-between", flexDirection: "row" },
@@ -71,20 +70,24 @@ export const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     padding: 10,
+    // marginBottom: 40,
   },
   inputMessage: {
-    width: windowWidth * 0.75,
+    flex: 6,
     height: 30,
     // marginBottom: 10,
   },
+  sendContainer: {
+    backgroundColor: "#323B76",
+    flex: 1,
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   sendText: {
-    marginRight: 5,
-    color: '#fff',
-    backgroundColor: 'black',
+    color: "#fff",
     fontSize: 18,
-    fontWeight: 'bold',
-    padding: 2,
-    borderRadius:5
+    fontWeight: "bold",
   },
   noMessages: { alignSelf: "center", color: "#FFF" },
   spacing: {
