@@ -1,19 +1,23 @@
-import {doc, onSnapshot} from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import React from "react";
-import {useState, useContext, useEffect} from "react";
-import {Text, Pressable, View, TouchableOpacity} from "react-native";
-import {UserContext} from "../../contexts/UserContext";
-import {db} from "../../utils/firestoreConfig";
-import {getUsers, selectAllEvents, selectEventById} from "../../utils/utils";
+import { useState, useContext, useEffect } from "react";
+import { Text, Pressable, View, TouchableOpacity } from "react-native";
+import { UserContext } from "../../../../contexts/UserContext";
+import { db } from "../../../../utils/firestoreConfig";
+import {
+  getUsers,
+  selectAllEvents,
+  selectEventById,
+} from "../../../../utils/utils";
 import {
   makeNameIdReference,
   truncate,
-} from "../Events.screen/utils/EventListUtils";
-import {styles} from "./ProfileEvents.style";
-import {confirmLeave} from "./ProfileUtils";
+} from "../../../Events.screen/utils/EventListUtils";
+import { styles } from "../../ProfileEvents.style";
+import { confirmLeave } from "../../../../utils/ProfileUtils";
 
-export const MyPendingRequests = ({user_id, navigation}) => {
-  const {currentUser} = useContext(UserContext);
+export const MyPendingRequests = ({ user_id, navigation }) => {
+  const { currentUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
   const [userNames, setUserNames] = useState({});
   const [pendingRequestIds, setPendingRequestIds] = useState([]);
@@ -77,7 +81,7 @@ export const MyPendingRequests = ({user_id, navigation}) => {
             <TouchableOpacity
               style={styles.item}
               onPress={() => {
-                navigation.navigate("Event", {eventId: myEvent.id});
+                navigation.navigate("Event", { eventId: myEvent.id });
               }}
             >
               <Text style={styles.title}>{myEvent.title}</Text>
@@ -91,7 +95,7 @@ export const MyPendingRequests = ({user_id, navigation}) => {
               </Text>
             </TouchableOpacity>
             <Pressable
-              style={({pressed}) => [
+              style={({ pressed }) => [
                 {
                   backgroundColor: pressed
                     ? "rgba(108, 93, 171, 0.5)"
