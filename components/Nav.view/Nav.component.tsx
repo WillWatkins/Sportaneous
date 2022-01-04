@@ -22,7 +22,10 @@ export function Nav() {
       <Drawer.Screen
         name="Event"
         component={SingleEvent}
-        options={{ drawerItemStyle: { display: "none" } }}
+        options={{
+          drawerItemStyle: { display: "none" },
+          title: "Event Details",
+        }}
       />
       <Drawer.Screen
         name="PhoneSignIn"
@@ -49,7 +52,10 @@ export function Nav() {
       <Drawer.Screen
         name="AcceptReject"
         component={AcceptReject}
-        options={{ drawerItemStyle: { display: "none" } }}
+        options={{
+          drawerItemStyle: { display: "none" },
+          title: "Review Attendees",
+        }}
       />
       <Drawer.Screen
         name="ViewProfile"
