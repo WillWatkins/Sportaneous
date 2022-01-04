@@ -1,5 +1,3 @@
 {
-    "plugins" :[
-        ["module:react-native-dotenv"]
-    ]
+  "plugins": ["react-native-reanimated/plugin", "module:react-native-dotenv"]
 }
