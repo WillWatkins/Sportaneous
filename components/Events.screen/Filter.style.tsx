@@ -1,6 +1,7 @@
-import {Dimensions, StyleSheet} from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 export const theme = {};
 
@@ -49,10 +50,7 @@ export const styles = StyleSheet.create({
   refreshButton: {
     borderWidth: 1,
     borderColor: "#323B76",
-    // borderBottomLeftRadius: 10,
-    // borderBottomRightRadius: 10,
     padding: 8,
-    // marginBottom: 8,
     alignSelf: "center",
     width: windowWidth / 1.089,
   },
@@ -62,9 +60,9 @@ export const styles = StyleSheet.create({
     color: "whitesmoke",
   },
   checkBoxContainer: {
-    justifyContent: "center",
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: "column",
+    height: windowHeight * 0.2,
+    alignItems: "center",
   },
   checkBox: {
     backgroundColor: "#FFF",
