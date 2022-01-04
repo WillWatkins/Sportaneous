@@ -18,6 +18,8 @@ import {
 } from "../../utils/utils";
 import { UserContext } from "../../contexts/UserContext";
 import { styles } from "./AddEvent.style";
+import { Picker } from "@react-native-picker/picker";
+import categories from "../Events.screen/utils/EventCategories.json";
 
 type AddEventProps = {
   navigation: {
@@ -28,7 +30,6 @@ type AddEventProps = {
 export const AddEvent = ({ navigation }: AddEventProps) => {
   const { currentUser } = useContext(UserContext);
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [maxCapacity, setMaxCapacity] = useState("");
@@ -36,6 +37,7 @@ export const AddEvent = ({ navigation }: AddEventProps) => {
   const [time, setTime] = useState<Date>();
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+  const [category, setCategory] = useState("");
 
   const changeSelectedDate = (event: any, selectedDate: Date | undefined) => {
     const currentDate = selectedDate || date;
@@ -89,6 +91,18 @@ export const AddEvent = ({ navigation }: AddEventProps) => {
     time
   );
 
+  const numberPicker = () => {
+    const nums = [];
+    for (let index = 1; index <= 100; index++) {
+      nums.push(index.toString());
+    }
+    if (nums.length === 100)
+      return nums.map((num) => {
+        return <Picker.Item label={num} value={num} />;
+      });
+  };
+
+  const pickerCategories = Object.keys(categories);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -100,37 +114,46 @@ export const AddEvent = ({ navigation }: AddEventProps) => {
                 style={styles.inputField}
                 onChangeText={setTitle}
                 value={title}
-                placeholder="title"
+                placeholder="Title"
                 placeholderTextColor="grey"
               />
-              <TextInput
-                style={styles.inputField}
-                onChangeText={setCategory}
-                value={category}
-                placeholder="category"
-                placeholderTextColor="grey"
-              />
+              <View style={styles.pickerContainer}>
+                <Text style={styles.pickerText}>Categories:</Text>
+                <Picker
+                  selectedValue={category}
+                  onValueChange={(itemValue) => setCategory(itemValue)}
+                  itemStyle={styles.catPicker}
+                >
+                  {pickerCategories.map((category) => {
+                    return <Picker.Item label={category} value={category} />;
+                  })}
+                </Picker>
+              </View>
               <TextInput
                 style={styles.inputField}
                 onChangeText={setDescription}
                 value={description}
-                placeholder="description"
+                placeholder="Description"
                 placeholderTextColor="grey"
+                multiline={true}
               />
               <TextInput
                 style={styles.inputField}
                 onChangeText={setLocation}
                 value={location}
-                placeholder="city"
+                placeholder="City"
                 placeholderTextColor="grey"
               />
-              <TextInput
-                style={styles.inputField}
-                onChangeText={setMaxCapacity}
-                value={maxCapacity}
-                placeholder="how many people can join?"
-                placeholderTextColor="grey"
-              />
+              <View style={styles.pickerContainer}>
+                <Text style={styles.pickerText}>Number of attendees:</Text>
+                <Picker
+                  selectedValue={maxCapacity}
+                  onValueChange={(itemValue) => setMaxCapacity(itemValue)}
+                  itemStyle={styles.capacityPicker}
+                >
+                  {numberPicker()}
+                </Picker>
+              </View>
             </View>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
