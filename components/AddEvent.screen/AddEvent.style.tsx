@@ -63,29 +63,8 @@ export const styles = StyleSheet.create({
     color: "grey",
   },
   pickerText: { textAlign: "left", color: "grey", alignSelf: "center" },
-
-  datetimeInputField: {
-    height: 45,
-    width: 130,
-    marginBottom: 5,
-    padding: 10,
-    backgroundColor: "#FFF",
-    borderRadius: 5,
-    borderColor: "#DADBDF",
-    borderWidth: 1,
-  },
-  datetime: {
-    justifyContent: "space-between",
-    alignSelf: "center",
-    width: 250,
-    flexDirection: "row",
-  },
   picker: {
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
     width: 100,
-    flexDirection: "row",
   },
   post: {
     alignItems: "center",
