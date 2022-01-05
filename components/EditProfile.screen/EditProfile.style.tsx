@@ -35,11 +35,21 @@ export const styles = StyleSheet.create({
   },
   inputTitle: {
     textAlign: "left",
-    textTransform: "uppercase",
+    textTransform: "capitalize",
     paddingBottom: 3,
   },
   inputField: {
     height: 45,
+    width: 250,
+    marginBottom: 5,
+    padding: 10,
+    backgroundColor: "#FFF",
+    borderRadius: 5,
+    borderColor: "#DADBDF",
+    borderWidth: 1,
+  },
+  descriptionInputField: {
+    height: 90,
     width: 250,
     marginBottom: 5,
     padding: 10,
@@ -57,6 +67,7 @@ export const styles = StyleSheet.create({
     padding: 8,
     backgroundColor: "#323B76",
     borderRadius: 8,
+    marginHorizontal: 10,
   },
   submitText: {
     textAlign: "center",
@@ -77,5 +88,9 @@ export const styles = StyleSheet.create({
     color: "red",
     fontSize: 17,
     textTransform: "uppercase",
+  },
+  buttonContainer: {
+    flexWrap: "wrap",
+    flexDirection: "row",
   },
 });

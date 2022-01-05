@@ -1,16 +1,21 @@
 import { styles } from "../../UserDetails.style";
 import { Image, View, Text, Pressable } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../../../contexts/UserContext";
 
 export const UserDetails = ({ navigation, imgURL }: any) => {
   const { currentUser } = useContext(UserContext);
 
+  useEffect(() => {}, [currentUser]);
+
   return (
     <View>
       <View style={styles.detailsContainer}>
-        {imgURL ? (
-          <Image source={{ uri: imgURL }} style={styles.avatar} />
+        {currentUser.image_bitmap ? (
+          <Image
+            source={{ uri: currentUser.image_bitmap }}
+            style={styles.avatar}
+          />
         ) : null}
         <Text
           style={styles.detailsName}

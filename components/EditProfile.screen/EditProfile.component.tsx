@@ -83,7 +83,6 @@ export const EditProfile = ({ navigation }: UpdateUserProps) => {
       .then((url) => {
         handleChange(url, "image_bitmap");
         setImgURL(url);
-        return imgURL;
       })
       .catch((err) => {
         err;
@@ -115,18 +114,14 @@ export const EditProfile = ({ navigation }: UpdateUserProps) => {
       : setSize(windowHeight * 0.82);
     setSize;
   }, [keyboard.keyboardShown]);
-
   return (
     <View>
       <Text style={styles.title}>UPDATE DETAILS</Text>
       <View style={{ height: size }}>
         <ScrollView>
           <View style={styles.inputContainer}>
-            {currentUser.image_bitmap ? (
-              <Image
-                source={{ uri: currentUser.image_bitmap }}
-                style={styles.avatar}
-              />
+            {imgURL ? (
+              <Image source={{ uri: imgURL }} style={styles.avatar} />
             ) : null}
             <TouchableOpacity style={styles.submitButton} onPress={selectPhoto}>
               <Text style={styles.submitText}>Update Photo</Text>
@@ -137,22 +132,37 @@ export const EditProfile = ({ navigation }: UpdateUserProps) => {
               style={styles.inputField}
               onChangeText={(text) => handleChange(text, "first_name")}
               placeholder="First Name"
+              placeholderTextColor="grey"
             />
             <Text style={styles.inputTitle}>Last Name:</Text>
             <TextInput
               style={styles.inputField}
               onChangeText={(text) => handleChange(text, "last_name")}
               placeholder="Last Name"
+              placeholderTextColor="grey"
             />
             <Text style={styles.inputTitle}>Description:</Text>
             <TextInput
-              style={styles.inputField}
+              style={styles.descriptionInputField}
               onChangeText={(text) => handleChange(text, "description")}
               placeholder="Description"
+              placeholderTextColor="grey"
+              multiline={true}
             />
-            <TouchableOpacity style={styles.submitButton} onPress={updateUser}>
-              <Text style={styles.submitText}>SUBMIT</Text>
-            </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.submitButton}
+                onPress={updateUser}
+              >
+                <Text style={styles.submitText}>SUBMIT</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.submitButton}
+                onPress={() => navigation.navigate("Profile")}
+              >
+                <Text style={styles.submitText}>CANCEL</Text>
+              </TouchableOpacity>
+            </View>
           </View>
           <TouchableOpacity
             style={styles.deleteUserButton}

@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     borderColor: "#DADBDF",
-    borderWidth: 2,
+    borderWidth: 1,
     backgroundColor: "#FFF",
     justifyContent: "center",
   },
