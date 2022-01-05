@@ -25,7 +25,7 @@ type UpdateUserProps = {
 };
 
 export const EditProfile = ({ navigation }: UpdateUserProps) => {
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   const [imgURL, setImgURL] = useState("");
   const [userDetails, setUserDetails] = useState(currentUser);
   const windowHeight = Dimensions.get("window").height;
@@ -49,6 +49,7 @@ export const EditProfile = ({ navigation }: UpdateUserProps) => {
 
   const updateUser = () => {
     updateUserDetails(userDetails, currentUser.id);
+    setCurrentUser(userDetails);
     navigation.navigate("Profile");
   };
 
