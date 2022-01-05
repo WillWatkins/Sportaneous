@@ -74,8 +74,8 @@ const Filter = ({
             style={({ pressed }) => [
               {
                 backgroundColor: pressed
-                  ? "rgba(108, 93, 171, 0.5)"
-                  : "rgba(108, 93, 171, 1)",
+                  ? "rgba(50, 59, 118, 0.5)"
+                  : "rgba(50, 59, 118, 1)",
               },
               styles.lowerButtonClear,
             ]}

@@ -3,8 +3,6 @@ import { Dimensions, StyleSheet } from "react-native";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-export const theme = {};
-
 export const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
@@ -30,7 +28,6 @@ export const styles = StyleSheet.create({
   lowerButtonClear: {
     borderWidth: 0.5,
     borderColor: "#323B76",
-    borderBottomLeftRadius: 10,
     padding: 8,
     marginRight: 5,
     marginTop: 10,
@@ -40,7 +37,6 @@ export const styles = StyleSheet.create({
   lowerButtonApply: {
     borderWidth: 0.5,
     borderColor: "#323B76",
-    borderBottomRightRadius: 10,
     padding: 8,
     marginLeft: 5,
     marginTop: 10,
@@ -53,6 +49,9 @@ export const styles = StyleSheet.create({
     padding: 8,
     alignSelf: "center",
     width: windowWidth / 1.089,
+
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
   },
   buttonTitle: {
     textAlign: "center",

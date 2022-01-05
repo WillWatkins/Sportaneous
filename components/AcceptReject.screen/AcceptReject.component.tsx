@@ -129,7 +129,7 @@ export const AcceptReject = ({ route, navigation }) => {
       <Text style={styles.title}>{eventTitle}</Text>
       {attendingUsers.length > 0 ? (
         <>
-          <Text>Accepted users:</Text>
+          <Text style={styles.title}>Accepted users:</Text>
           <FlatList
             data={attendingUsers}
             renderItem={renderAttendingItem}

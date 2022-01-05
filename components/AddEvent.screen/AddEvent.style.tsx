@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
   postButton: {
     marginVertical: 13,
     padding: 8,
-    backgroundColor: "#2B2C33",
+    backgroundColor: "#323B76",
     borderRadius: 5,
     width: 110,
     alignItems: "center",

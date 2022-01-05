@@ -17,10 +17,9 @@ export const styles = StyleSheet.create({
   joinSubHeader: {
     fontWeight: "bold",
     fontSize: 17,
-    alignSelf: "flex-start",
+    alignSelf: "center",
     marginTop: 10,
     paddingLeft: 15,
-    textDecorationLine: "underline",
   },
 
   container: {

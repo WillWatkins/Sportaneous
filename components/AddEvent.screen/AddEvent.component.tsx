@@ -173,6 +173,7 @@ export const AddEvent = ({ navigation }: AddEventProps) => {
                 display="default"
                 onChange={changeSelectedDate}
                 style={styles.picker}
+                textColor="black"
               />
             </View>
 
@@ -185,6 +186,7 @@ export const AddEvent = ({ navigation }: AddEventProps) => {
                 display="default"
                 onChange={changeSelectedTime}
                 style={styles.picker}
+                textColor="black"
               />
             </View>
 
