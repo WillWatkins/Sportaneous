@@ -27,3 +27,15 @@ To install this api and its dependencies:
         npm install
 
 Video Tour showing the following features:
+
+![Events-list-demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/events.gif)
+
+![Profile demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/profile.gif)
+
+![Edit-profile-demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/edit_profile.gif)
+
+![Add-events-demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/add_event.gif)
+
+![Review-user-requests-and-delete-demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/review_and_delete.gif)
+
+![Chat-demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/chat.gif)
