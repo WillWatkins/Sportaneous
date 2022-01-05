@@ -1,32 +1,10 @@
 import { styles } from "../../UserDetails.style";
 import { Image, View, Text, Pressable } from "react-native";
-import React, { useEffect, useState, useContext } from "react";
-import { storage } from "../../../../utils/firestoreConfig";
+import React, { useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext";
 
-import { getDownloadURL, ref } from "firebase/storage";
-
-export const UserDetails = ({ navigation }: any) => {
-  const [imgURL, setImgURL] = useState("");
+export const UserDetails = ({ navigation, imgURL }: any) => {
   const { currentUser } = useContext(UserContext);
-
-  //Storage Ref for IMG file
-  const storageRef = ref(storage, currentUser.image_bitmap);
-
-  useEffect(() => {
-    //firebase storage request for IMG file
-    try {
-      getDownloadURL(storageRef)
-        .then((res) => {
-          setImgURL(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }, [imgURL, currentUser]);
 
   return (
     <View>
