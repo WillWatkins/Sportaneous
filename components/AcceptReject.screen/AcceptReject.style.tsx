@@ -27,8 +27,8 @@ export const styles = StyleSheet.create({
   name: {
     textAlign: "center",
     fontSize: 20,
-    padding: 20,
-    width: windowWidth / 1,
+    // padding: 20,
+    width: windowWidth,
     textTransform: "capitalize",
   },
   navigate: {

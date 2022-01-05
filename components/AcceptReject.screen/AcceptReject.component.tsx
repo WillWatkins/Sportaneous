@@ -38,11 +38,33 @@ export const AcceptReject = ({ route, navigation }) => {
     });
   }, [eventId, reloadTrigger]);
 
-  const AttendeesItem = ({ item }) => (
-    <View style={styles.item}>
+  const usernamecomponent = (item) => {
+    return (
       <Text style={styles.name}>
         {item.first_name} {item.last_name}
       </Text>
+    );
+  };
+  const navigateComponent = (item) => {
+    return (
+      <Pressable
+        style={styles.navigate}
+        onPress={() => {
+          navigation.navigate("ViewProfile", {
+            userId: item.userId,
+            eventId,
+            eventTitle,
+          });
+        }}
+      >
+        <Text style={styles.buttonsText}>View profile</Text>
+      </Pressable>
+    );
+  };
+
+  const AttendeesItem = ({ item }) => (
+    <View style={styles.item}>
+      {usernamecomponent(item)}
       <Pressable
         style={styles.reject}
         onPress={() => {
@@ -59,26 +81,13 @@ export const AcceptReject = ({ route, navigation }) => {
       >
         <Text style={styles.buttonsText}>Remove Attendee</Text>
       </Pressable>
-      <Pressable
-        style={styles.navigate}
-        onPress={() => {
-          navigation.navigate("ViewProfile", {
-            userId: item.userId,
-            eventId,
-            eventTitle,
-          });
-        }}
-      >
-        <Text style={styles.buttonsText}>View user profile</Text>
-      </Pressable>
+      {navigateComponent(item)}
     </View>
   );
 
   const PendingAttendeesItem = ({ item }) => (
     <View style={styles.item}>
-      <Text style={styles.name}>
-        {item.first_name} {item.last_name}
-      </Text>
+      {usernamecomponent(item)}
       <Pressable
         style={styles.accept}
         onPress={() => {
@@ -93,20 +102,9 @@ export const AcceptReject = ({ route, navigation }) => {
           });
         }}
       >
-        <Text style={styles.buttonsText}>Add attendee to Event!</Text>
+        <Text style={styles.buttonsText}>Add to Event</Text>
       </Pressable>
-      <Pressable
-        style={styles.navigate}
-        onPress={() => {
-          navigation.navigate("ViewProfile", {
-            userId: item.userId,
-            eventId,
-            eventTitle,
-          });
-        }}
-      >
-        <Text style={styles.buttonsText}>Check user profile</Text>
-      </Pressable>
+      {navigateComponent(item)}
     </View>
   );
 
@@ -131,7 +129,7 @@ export const AcceptReject = ({ route, navigation }) => {
       <Text style={styles.title}>{eventTitle}</Text>
       {attendingUsers.length > 0 ? (
         <>
-          <Text>Attending:</Text>
+          <Text>Accepted users:</Text>
           <FlatList
             data={attendingUsers}
             renderItem={renderAttendingItem}
@@ -143,7 +141,7 @@ export const AcceptReject = ({ route, navigation }) => {
       )}
       {pendingUsers.length > 0 ? (
         <>
-          <Text>Requested:</Text>
+          <Text style={styles.title}>Requested users:</Text>
           <FlatList
             data={pendingUsers}
             renderItem={renderPendingItem}
