@@ -20,11 +20,12 @@ export const HostInfo = ({ hostDetails }: props) => {
 
   return (
     <View style={styles.hostView}>
-      <Text style={styles.text}>About the host:</Text>
+      {imgURL ? (
+        <Image source={{ uri: imgURL }} style={styles.hostAvatar} />
+      ) : null}
       <Text
         style={styles.capitalizedText}
       >{`${hostDetails?.first_name} ${hostDetails?.last_name}`}</Text>
-      {imgURL ? <Image source={{ uri: imgURL }} /> : null}
       <Text style={styles.text}>{hostDetails?.description}</Text>
     </View>
   );

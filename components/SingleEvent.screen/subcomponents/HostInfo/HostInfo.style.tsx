@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const windowHeight = Dimensions.get("window").height;
 
 export const styles = StyleSheet.create({
   hostView: {
@@ -11,14 +13,23 @@ export const styles = StyleSheet.create({
     marginBottom: 0,
     borderWidth: 1,
     borderColor: "#DADBDF",
+    maxHeight: windowHeight / 2,
   },
   text: {
     fontSize: 18,
     margin: 5,
+    alignSelf: "center",
   },
   capitalizedText: {
     fontSize: 18,
     margin: 5,
     textTransform: "capitalize",
+    alignSelf: "center",
+  },
+  hostAvatar: {
+    borderRadius: 100,
+    height: 100,
+    width: 100,
+    alignSelf: "center",
   },
 });
