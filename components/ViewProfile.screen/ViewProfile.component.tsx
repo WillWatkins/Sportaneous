@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { getUserById } from "../../utils/utils";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../../utils/firestoreConfig.js";
+import { HostInfo } from "../SingleEvent.screen/subcomponents/HostInfo/HostInfo.component";
 
 export const ViewProfile = ({ route, navigation }) => {
   const { userId, eventId, eventTitle } = route.params;
@@ -17,6 +18,8 @@ export const ViewProfile = ({ route, navigation }) => {
     image_bitmap: "",
     requested_events: [],
     description: "",
+    accepted_events: [],
+    id: "",
   });
 
   useEffect(() => {
@@ -24,16 +27,6 @@ export const ViewProfile = ({ route, navigation }) => {
       .then((userData) => {
         setImgURL(userData?.image_bitmap);
         setUserDetails(userData);
-        return imgURL;
-      })
-      .then((imgURL) => {
-        console.log(imgURL);
-        let storageRef = ref(storage, imgURL);
-        return getDownloadURL(storageRef);
-      })
-      .then((image) => {
-        setImgURL(image);
-        return imgURL;
       })
       .catch((err) => {
         console.log(err);
@@ -42,13 +35,7 @@ export const ViewProfile = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {imgURL ? <Image source={{ uri: imgURL }} style={styles.avatar} /> : null}
-      <View style={styles.details}>
-        <Text style={styles.title}>
-          {userDetails.first_name} {userDetails.last_name}
-        </Text>
-        <Text style={styles.title}>{userDetails.description}</Text>
-      </View>
+      <HostInfo hostDetails={userDetails} />
       <Pressable
         style={styles.backButton}
         onPress={() => {
