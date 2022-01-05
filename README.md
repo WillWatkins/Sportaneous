@@ -40,4 +40,4 @@ Video Tour showing the following features:
 
 ![Chat-demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/chat.gif)
 
-<img src="./gifs/events.gif" width="50%" height="50%"/>
+<img src="./gifs/events.gif" width="20%" height="20%"/>
