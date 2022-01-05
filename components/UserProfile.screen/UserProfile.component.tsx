@@ -40,8 +40,8 @@ export const UserProfile = ({ navigation }: any) => {
   console.log(currentUser);
   return (
     <SafeAreaView style={styles.page}>
+      <Text style={styles.header}>ACCOUNT DETAILS</Text>
       <ScrollView>
-        <Text style={styles.header}>ACCOUNT DETAILS</Text>
         <UserDetails navigation={navigation} imgURL={imgURL} />
         <MyHostedEvents user_id={currentUser.id} navigation={navigation} />
         <MyAcceptedRequests user_id={currentUser.id} navigation={navigation} />
