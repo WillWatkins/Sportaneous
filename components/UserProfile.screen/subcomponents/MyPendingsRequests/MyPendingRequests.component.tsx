@@ -15,12 +15,14 @@ import {
 } from "../../../Events.screen/utils/EventListUtils";
 import { styles } from "../../ProfileEvents.style";
 import { confirmLeave } from "../../../../utils/ProfileUtils";
+import Collapsible from "react-native-collapsible";
 
 export const MyPendingRequests = ({ user_id, navigation }) => {
   const { currentUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
   const [userNames, setUserNames] = useState({});
   const [pendingRequestIds, setPendingRequestIds] = useState([]);
+  const [requestedIsCollapsed, setRequestedIsCollapsed] = useState(true);
   const [pendingRequests, setPendingRequests] = useState([
     {
       title: "dummy",
@@ -74,49 +76,62 @@ export const MyPendingRequests = ({ user_id, navigation }) => {
   }
   return (
     <View>
-      <Text style={styles.joinSubHeader}>Pending Join Requests</Text>
-      {pendingRequests.map((myEvent) => {
-        return (
-          <View style={styles.container} key={myEvent.id}>
-            <TouchableOpacity
-              style={styles.item}
-              onPress={() => {
-                navigation.navigate("Event", { eventId: myEvent.id });
-              }}
-            >
-              <Text style={styles.title}>{myEvent.title}</Text>
-              <Text style={styles.user}>{userNames[myEvent.host_id]}</Text>
-              <Text style={styles.location}>{myEvent.location}</Text>
-              <Text style={styles.date}>{myEvent.date}</Text>
-              <Text style={styles.category}>{myEvent.category}</Text>
-              <Text style={styles.time}>{myEvent.time}</Text>
-              <Text style={styles.description}>
-                {truncate(myEvent.description)}
-              </Text>
-            </TouchableOpacity>
-            <Pressable
-              style={({ pressed }) => [
-                {
-                  backgroundColor: pressed
-                    ? "rgba(108, 93, 171, 0.5)"
-                    : "rgba(108, 93, 171, 1)",
-                },
-                styles.requestsButton,
-              ]}
-              onPress={() => {
-                const userInfo = {
-                  first_name: currentUser.first_name,
-                  last_name: currentUser.last_name,
-                  userId: currentUser.id,
-                };
-                confirmLeave(userInfo, myEvent.id);
-              }}
-            >
-              <Text style={styles.buttonTitle}>Cancel Request</Text>
-            </Pressable>
-          </View>
-        );
-      })}
+      <Pressable
+        onPress={() => {
+          setRequestedIsCollapsed(requestedIsCollapsed === true ? false : true);
+        }}
+      >
+        {requestedIsCollapsed ? (
+          <Text style={styles.eventHeader}>My Requested Events ▼</Text>
+        ) : (
+          <Text style={styles.eventHeader}>My Requested Events ▲</Text>
+        )}
+      </Pressable>
+      <Collapsible collapsed={requestedIsCollapsed}>
+        <Text style={styles.joinSubHeader}>Pending Join Requests</Text>
+        {pendingRequests.map((myEvent) => {
+          return (
+            <View style={styles.container} key={myEvent.id}>
+              <TouchableOpacity
+                style={styles.item}
+                onPress={() => {
+                  navigation.navigate("Event", { eventId: myEvent.id });
+                }}
+              >
+                <Text style={styles.title}>{myEvent.title}</Text>
+                <Text style={styles.user}>{userNames[myEvent.host_id]}</Text>
+                <Text style={styles.location}>{myEvent.location}</Text>
+                <Text style={styles.date}>{myEvent.date}</Text>
+                <Text style={styles.category}>{myEvent.category}</Text>
+                <Text style={styles.time}>{myEvent.time}</Text>
+                <Text style={styles.description}>
+                  {truncate(myEvent.description)}
+                </Text>
+              </TouchableOpacity>
+              <Pressable
+                style={({ pressed }) => [
+                  {
+                    backgroundColor: pressed
+                      ? "rgba(108, 93, 171, 0.5)"
+                      : "rgba(108, 93, 171, 1)",
+                  },
+                  styles.requestsButton,
+                ]}
+                onPress={() => {
+                  const userInfo = {
+                    first_name: currentUser.first_name,
+                    last_name: currentUser.last_name,
+                    userId: currentUser.id,
+                  };
+                  confirmLeave(userInfo, myEvent.id);
+                }}
+              >
+                <Text style={styles.buttonTitle}>Cancel Request</Text>
+              </Pressable>
+            </View>
+          );
+        })}
+      </Collapsible>
     </View>
   );
 };

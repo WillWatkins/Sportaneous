@@ -15,7 +15,7 @@ import { confirmDelete } from "../../../../utils/ProfileUtils";
 export const MyHostedEvents = ({ user_id, navigation }) => {
   const { currentUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [hostedIsCollapsed, setHostedIsCollapsed] = useState(false);
+  const [hostedIsCollapsed, setHostedIsCollapsed] = useState(true);
   const [myHostedEventIds, setMyHostedEventIds] = useState([]);
   const [myHostedEvents, setMyHostedEvents] = useState([
     {

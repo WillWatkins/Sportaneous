@@ -5,23 +5,21 @@ import { useState, useContext } from "react";
 import { Text, Pressable, View, TouchableOpacity } from "react-native";
 import { UserContext } from "../../../../contexts/UserContext";
 import { db } from "../../../../utils/firestoreConfig";
-import {
-  getUsers,
-  selectAllEvents,
-  selectEventById,
-} from "../../../../utils/firebaseUtils";
+import { getUsers, selectEventById } from "../../../../utils/firebaseUtils";
 import {
   makeNameIdReference,
   truncate,
 } from "../../../Events.screen/utils/EventListUtils";
 import { styles } from "../../ProfileEvents.style";
 import { confirmLeave } from "../../../../utils/ProfileUtils";
+import Collapsible from "react-native-collapsible";
 
 export const MyAcceptedRequests = ({ user_id, navigation }) => {
   const { currentUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
   const [userNames, setUserNames] = useState({});
   const [acceptedRequestIds, setAcceptedRequestIds] = useState([]);
+  const [acceptedIsCollapsed, setAcceptedIsCollapsed] = useState(true);
   const [acceptedRequests, setAcceptedRequests] = useState([
     {
       title: "dummy",
@@ -75,49 +73,62 @@ export const MyAcceptedRequests = ({ user_id, navigation }) => {
   }
   return (
     <View>
-      <Text style={styles.joinSubHeader}>Accepted Join Requests</Text>
-      {acceptedRequests.map((myEvent) => {
-        return (
-          <View style={styles.container}>
-            <TouchableOpacity
-              style={styles.item}
-              onPress={() => {
-                navigation.navigate("Event", { eventId: myEvent.id });
-              }}
-            >
-              <Text style={styles.title}>{myEvent.title}</Text>
-              <Text style={styles.user}>{userNames[myEvent.host_id]}</Text>
-              <Text style={styles.location}>{myEvent.location}</Text>
-              <Text style={styles.date}>{myEvent.date}</Text>
-              <Text style={styles.category}>{myEvent.category}</Text>
-              <Text style={styles.time}>{myEvent.time}</Text>
-              <Text style={styles.description}>
-                {truncate(myEvent.description)}
-              </Text>
-            </TouchableOpacity>
-            <Pressable
-              style={({ pressed }) => [
-                {
-                  backgroundColor: pressed
-                    ? "rgba(108, 93, 171, 0.5)"
-                    : "rgba(108, 93, 171, 1)",
-                },
-                styles.requestsButton,
-              ]}
-              onPress={() => {
-                const userInfo = {
-                  first_name: currentUser.first_name,
-                  last_name: currentUser.last_name,
-                  userId: currentUser.id,
-                };
-                confirmLeave(userInfo, myEvent.id);
-              }}
-            >
-              <Text style={styles.buttonTitle}>Leave Event</Text>
-            </Pressable>
-          </View>
-        );
-      })}
+      <Pressable
+        onPress={() => {
+          setAcceptedIsCollapsed(acceptedIsCollapsed === true ? false : true);
+        }}
+      >
+        {acceptedIsCollapsed ? (
+          <Text style={styles.eventHeader}>My Accepted Events ▼</Text>
+        ) : (
+          <Text style={styles.eventHeader}>My Accepted Events ▲</Text>
+        )}
+      </Pressable>
+      <Collapsible collapsed={acceptedIsCollapsed}>
+        <Text style={styles.joinSubHeader}>Accepted Join Requests</Text>
+        {acceptedRequests.map((myEvent) => {
+          return (
+            <View style={styles.container}>
+              <TouchableOpacity
+                style={styles.item}
+                onPress={() => {
+                  navigation.navigate("Event", { eventId: myEvent.id });
+                }}
+              >
+                <Text style={styles.title}>{myEvent.title}</Text>
+                <Text style={styles.user}>{userNames[myEvent.host_id]}</Text>
+                <Text style={styles.location}>{myEvent.location}</Text>
+                <Text style={styles.date}>{myEvent.date}</Text>
+                <Text style={styles.category}>{myEvent.category}</Text>
+                <Text style={styles.time}>{myEvent.time}</Text>
+                <Text style={styles.description}>
+                  {truncate(myEvent.description)}
+                </Text>
+              </TouchableOpacity>
+              <Pressable
+                style={({ pressed }) => [
+                  {
+                    backgroundColor: pressed
+                      ? "rgba(108, 93, 171, 0.5)"
+                      : "rgba(108, 93, 171, 1)",
+                  },
+                  styles.requestsButton,
+                ]}
+                onPress={() => {
+                  const userInfo = {
+                    first_name: currentUser.first_name,
+                    last_name: currentUser.last_name,
+                    userId: currentUser.id,
+                  };
+                  confirmLeave(userInfo, myEvent.id);
+                }}
+              >
+                <Text style={styles.buttonTitle}>Leave Event</Text>
+              </Pressable>
+            </View>
+          );
+        })}
+      </Collapsible>
     </View>
   );
 };

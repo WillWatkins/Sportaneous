@@ -3,12 +3,12 @@ import { UserContext } from "../../contexts/UserContext";
 import { SafeAreaView, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { MyHostedEvents } from "./subcomponents/MyHostedEvents/MyHostedEvents.component";
-import { MyJoinedEvents } from "./subcomponents/MyJoinedEvents/MyJoinedEvents.component";
+import { MyPendingRequests } from "./subcomponents/MyPendingsRequests/MyPendingRequests.component";
 import { UserDetails } from "./subcomponents/UserDetails/UserDetails.component";
 import { styles } from "./UserDetails.style";
 import { getDownloadURL, ref } from "firebase/storage";
-
 import { storage } from "../../utils/firestoreConfig";
+import { MyAcceptedRequests } from "./subcomponents/MyAcceptedRequests/MyAcceptedRequests.component";
 
 export const UserProfile = ({ navigation }: any) => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
@@ -44,7 +44,8 @@ export const UserProfile = ({ navigation }: any) => {
         <Text style={styles.header}>ACCOUNT DETAILS</Text>
         <UserDetails navigation={navigation} imgURL={imgURL} />
         <MyHostedEvents user_id={currentUser.id} navigation={navigation} />
-        <MyJoinedEvents user_id={currentUser.id} navigation={navigation} />
+        <MyAcceptedRequests user_id={currentUser.id} navigation={navigation} />
+        <MyPendingRequests user_id={currentUser.id} navigation={navigation} />
       </ScrollView>
     </SafeAreaView>
   );
