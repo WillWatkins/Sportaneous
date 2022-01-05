@@ -1,10 +1,11 @@
 import { StyleSheet, Dimensions } from "react-native";
 
 const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 export const styles = StyleSheet.create({
   page: {
-    flex: 1,
+    height: windowHeight * 0.88,
   },
   avatar: {
     borderRadius: 100,
@@ -32,8 +33,6 @@ export const styles = StyleSheet.create({
   detailsContainer: {
     width: windowWidth * 0.9,
     alignSelf: "center",
-    flexDirection: "row",
-    flexWrap: "wrap",
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     borderColor: "#DADBDF",
@@ -67,6 +66,7 @@ export const styles = StyleSheet.create({
     paddingBottom: 5,
     padding: 5,
     fontSize: 18,
+    textAlign: "center",
   },
   editButton: {
     borderLeftWidth: 1,

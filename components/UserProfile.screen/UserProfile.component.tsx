@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import { SafeAreaView, Text } from "react-native";
+import { SafeAreaView, Text, View, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { MyHostedEvents } from "./subcomponents/MyHostedEvents/MyHostedEvents.component";
 import { MyPendingRequests } from "./subcomponents/MyPendingsRequests/MyPendingRequests.component";
@@ -13,6 +13,7 @@ import { MyAcceptedRequests } from "./subcomponents/MyAcceptedRequests/MyAccepte
 export const UserProfile = ({ navigation }: any) => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [imgURL, setImgURL] = useState("");
+  const windowHeight = Dimensions.get("window").height;
 
   //Storage Ref for IMG file
   const storageRef = ref(storage, currentUser.image_bitmap);
@@ -37,9 +38,8 @@ export const UserProfile = ({ navigation }: any) => {
     }
   }, [imgURL]);
 
-  console.log(currentUser);
   return (
-    <SafeAreaView style={styles.page}>
+    <View style={styles.page}>
       <Text style={styles.header}>ACCOUNT DETAILS</Text>
       <ScrollView>
         <UserDetails navigation={navigation} imgURL={imgURL} />
@@ -47,6 +47,6 @@ export const UserProfile = ({ navigation }: any) => {
         <MyAcceptedRequests user_id={currentUser.id} navigation={navigation} />
         <MyPendingRequests user_id={currentUser.id} navigation={navigation} />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
