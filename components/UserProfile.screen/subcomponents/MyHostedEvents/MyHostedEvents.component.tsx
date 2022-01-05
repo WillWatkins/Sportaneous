@@ -56,26 +56,6 @@ export const MyHostedEvents = ({ user_id, navigation }) => {
   if (isLoading) {
     return <Text>Loading hosted events ...</Text>;
   }
-  if (myHostedEvents.length < 1) {
-    return (
-      <View>
-        <Pressable
-          onPress={() => {
-            setHostedIsCollapsed(hostedIsCollapsed === true ? false : true);
-          }}
-        >
-          <Text style={styles.eventHeader}>My Hosted Events</Text>
-        </Pressable>
-        <ScrollView>
-          <Collapsible collapsed={hostedIsCollapsed}>
-            <Text style={styles.joinSubHeader}>
-              You have not hosted any events.
-            </Text>
-          </Collapsible>
-        </ScrollView>
-      </View>
-    );
-  }
   return (
     <View>
       <Pressable
@@ -87,63 +67,72 @@ export const MyHostedEvents = ({ user_id, navigation }) => {
       </Pressable>
       <ScrollView>
         <Collapsible collapsed={hostedIsCollapsed}>
-          {myHostedEvents.map((myEvent) => {
-            return (
-              <View style={styles.container} key={myEvent.id}>
-                <TouchableOpacity
-                  style={styles.item}
-                  onPress={() => {
-                    navigation.navigate("Event", { eventId: myEvent.id });
-                  }}
-                >
-                  <Text style={styles.title}>{myEvent.title}</Text>
-                  <Text
-                    style={styles.user}
-                  >{`${currentUser.first_name} ${currentUser.last_name}`}</Text>
-                  <Text style={styles.location}>{myEvent.location}</Text>
-                  <Text style={styles.date}>{myEvent.date}</Text>
-                  <Text style={styles.category}>{myEvent.category}</Text>
-                  <Text style={styles.time}>{myEvent.time}</Text>
-                  <Text style={styles.description}>
-                    {truncate(myEvent.description)}
-                  </Text>
-                </TouchableOpacity>
-                <Pressable
-                  style={({ pressed }) => [
-                    {
-                      backgroundColor: pressed
-                        ? "rgba(50, 59, 118, 0.5)"
-                        : "rgba(50, 59, 118, 1)",
-                    },
-                    styles.requestsButton,
-                  ]}
-                  onPress={() => {
-                    navigation.navigate("AcceptReject", {
-                      eventId: myEvent.id,
-                      eventTitle: myEvent.title,
-                    });
-                  }}
-                >
-                  <Text style={styles.buttonTitle}>Pending Requests</Text>
-                </Pressable>
-                <Pressable
-                  style={({ pressed }) => [
-                    {
-                      backgroundColor: pressed
-                        ? "rgba(108, 93, 171, 0.5)"
-                        : "rgba(108, 93, 171, 1)",
-                    },
-                    styles.deleteButton,
-                  ]}
-                  onPress={() => {
-                    confirmDelete(myEvent.id, { navigation }, user_id, myEvent);
-                  }}
-                >
-                  <Text style={styles.buttonTitle}>Delete Event</Text>
-                </Pressable>
-              </View>
-            );
-          })}
+          {myHostedEvents.length > 0 ? (
+            myHostedEvents.map((myEvent) => {
+              return (
+                <View style={styles.container} key={myEvent.id}>
+                  <TouchableOpacity
+                    style={styles.item}
+                    onPress={() => {
+                      navigation.navigate("Event", { eventId: myEvent.id });
+                    }}
+                  >
+                    <Text style={styles.title}>{myEvent.title}</Text>
+                    <Text
+                      style={styles.user}
+                    >{`${currentUser.first_name} ${currentUser.last_name}`}</Text>
+                    <Text style={styles.location}>{myEvent.location}</Text>
+                    <Text style={styles.date}>{myEvent.date}</Text>
+                    <Text style={styles.category}>{myEvent.category}</Text>
+                    <Text style={styles.time}>{myEvent.time}</Text>
+                    <Text style={styles.description}>
+                      {truncate(myEvent.description)}
+                    </Text>
+                  </TouchableOpacity>
+                  <Pressable
+                    style={({ pressed }) => [
+                      {
+                        backgroundColor: pressed
+                          ? "rgba(50, 59, 118, 0.5)"
+                          : "rgba(50, 59, 118, 1)",
+                      },
+                      styles.requestsButton,
+                    ]}
+                    onPress={() => {
+                      navigation.navigate("AcceptReject", {
+                        eventId: myEvent.id,
+                        eventTitle: myEvent.title,
+                      });
+                    }}
+                  >
+                    <Text style={styles.buttonTitle}>Pending Requests</Text>
+                  </Pressable>
+                  <Pressable
+                    style={({ pressed }) => [
+                      {
+                        backgroundColor: pressed
+                          ? "rgba(108, 93, 171, 0.5)"
+                          : "rgba(108, 93, 171, 1)",
+                      },
+                      styles.deleteButton,
+                    ]}
+                    onPress={() => {
+                      confirmDelete(
+                        myEvent.id,
+                        { navigation },
+                        user_id,
+                        myEvent
+                      );
+                    }}
+                  >
+                    <Text style={styles.buttonTitle}>Delete Event</Text>
+                  </Pressable>
+                </View>
+              );
+            })
+          ) : (
+            <Text style={styles.joinSubHeader}>You have no hosted events</Text>
+          )}
         </Collapsible>
       </ScrollView>
     </View>
