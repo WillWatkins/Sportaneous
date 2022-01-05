@@ -28,16 +28,14 @@ To install this api and its dependencies:
 
 Video Tour showing the following features:
 
-![Events-list-demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/events.gif)
+<img src="./gifs/events.gif" width="25%" height="25%"/>
 
-![Profile demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/profile.gif)
+<img src="./gifs/profile.gif" width="25%" height="25%"/>
 
-![Edit-profile-demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/edit_profile.gif)
+<img src="./gifs/edit_profile.gif" width="25%" height="25%"/>
 
-![Add-events-demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/add_event.gif)
+<img src="./gifs/add_event.gif" width="25%" height="25%"/>
 
-![Review-user-requests-and-delete-demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/review_and_delete.gif)
+<img src="./gifs/review_and_delete.gif" width="25%" height="25%"/>
 
-![Chat-demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/chat.gif)
-
-<img src="./gifs/events.gif" width="20%" height="20%"/>
+<img src="./gifs/chat.gif" width="25%" height="25%"/>
