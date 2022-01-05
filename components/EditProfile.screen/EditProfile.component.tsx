@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Text,
   TextInput,
@@ -12,14 +12,14 @@ import {
   Keyboard,
   TouchableOpacity,
 } from "react-native";
-import {styles} from "./EditProfile.style";
-import {UserContext} from "../../contexts/UserContext";
-import {SafeAreaView} from "react-native-safe-area-context";
-import {updateUserDetails, deleteUser} from "../../utils/utils";
+import { styles } from "./EditProfile.style";
+import { UserContext } from "../../contexts/UserContext";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { updateUserDetails, deleteUser } from "../../utils/firebaseUtils";
 import * as ImagePicker from "expo-image-picker";
-import {storage} from "../../utils/firestoreConfig";
-import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
-import {ScrollView} from "react-native-gesture-handler";
+import { storage } from "../../utils/firestoreConfig";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { ScrollView } from "react-native-gesture-handler";
 
 type UpdateUserProps = {
   navigation: {
@@ -27,15 +27,15 @@ type UpdateUserProps = {
   };
 };
 
-export const EditProfile = ({navigation}: UpdateUserProps) => {
-  const {currentUser} = useContext(UserContext);
+export const EditProfile = ({ navigation }: UpdateUserProps) => {
+  const { currentUser } = useContext(UserContext);
   const [imgURL, setImgURL] = useState("");
   const [userDetails, setUserDetails] = useState(currentUser);
 
   useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
-        const {status} =
+        const { status } =
           await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== "granted") {
           alert("Sorry, we need camera roll permissions to make this work!");
@@ -45,7 +45,7 @@ export const EditProfile = ({navigation}: UpdateUserProps) => {
   }, [imgURL]);
 
   const handleChange = (text: string, stateKey: string) => {
-    setUserDetails({...userDetails, [stateKey]: text});
+    setUserDetails({ ...userDetails, [stateKey]: text });
   };
 
   const updateUser = () => {
@@ -112,7 +112,9 @@ export const EditProfile = ({navigation}: UpdateUserProps) => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <Text style={styles.title}>Update Details</Text>
-        {imgURL ? <Image source={{uri: imgURL}} style={styles.avatar} /> : null}
+        {imgURL ? (
+          <Image source={{ uri: imgURL }} style={styles.avatar} />
+        ) : null}
         <Button onPress={selectPhoto} color="black" title="Choose Photo" />
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}

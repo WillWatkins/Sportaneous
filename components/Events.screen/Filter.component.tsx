@@ -3,7 +3,7 @@ import { Text, View, Pressable, ScrollView, FlatList } from "react-native";
 import { CheckBox } from "react-native-elements";
 import Collapsible from "react-native-collapsible";
 import { styles } from "./Filter.style";
-import { selectAllEvents } from "../../utils/utils";
+import { selectAllEvents } from "../../utils/firebaseUtils";
 import {
   updateCheckBox,
   resetSelection,

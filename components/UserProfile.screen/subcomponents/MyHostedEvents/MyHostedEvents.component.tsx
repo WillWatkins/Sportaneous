@@ -7,7 +7,7 @@ import Collapsible from "react-native-collapsible";
 import { ScrollView } from "react-native-gesture-handler";
 import { UserContext } from "../../../../contexts/UserContext";
 import { db } from "../../../../utils/firestoreConfig";
-import { selectEventById } from "../../../../utils/utils";
+import { selectEventById } from "../../../../utils/firebaseUtils";
 import { truncate } from "../../../Events.screen/utils/EventListUtils";
 import { styles } from "../../ProfileEvents.style";
 import { confirmDelete } from "../../../../utils/ProfileUtils";

@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {FlatList, SafeAreaView, Text, TouchableOpacity} from "react-native";
+import React, { useEffect, useState } from "react";
+import { FlatList, SafeAreaView, Text, TouchableOpacity } from "react-native";
 import styles from "./EventList.style";
 import Filter from "./Filter.component";
-import {getUsers, selectAllEvents} from "../../utils/utils";
-import {makeNameIdReference, truncate} from "./utils/EventListUtils";
-import {RefreshEvents} from "./RefreshEvents.component";
+import { getUsers, selectAllEvents } from "../../utils/firebaseUtils";
+import { makeNameIdReference, truncate } from "./utils/EventListUtils";
+import { RefreshEvents } from "./RefreshEvents.component";
 import EventCategories from "./utils/EventCategories.json";
 
-const EventList = ({navigation}) => {
+const EventList = ({ navigation }) => {
   interface categoryIsChecked {
     [category: string]: boolean;
   }
@@ -26,7 +26,7 @@ const EventList = ({navigation}) => {
       host_id: 0,
       location: "dummy",
       max_capacity: "dummy",
-      pending_attendee: {0: "dummy"},
+      pending_attendee: { 0: "dummy" },
       title: "dummy",
     },
   ]);
@@ -41,7 +41,7 @@ const EventList = ({navigation}) => {
     });
   }, []);
 
-  const Item = ({item, onPress, textColor}) => (
+  const Item = ({ item, onPress, textColor }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item]}>
       <Text style={styles.title}>{item.title}</Text>
       <Text style={[styles.user, textColor]}>{userNames[item.host_id]}</Text>
@@ -55,16 +55,16 @@ const EventList = ({navigation}) => {
     </TouchableOpacity>
   );
 
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     const color = item.id === selectedId ? "white" : "black";
     return (
       <Item
         item={item}
         onPress={() => {
           setSelectedId(item.chat_id);
-          navigation.navigate("Event", {eventId: item.id});
+          navigation.navigate("Event", { eventId: item.id });
         }}
-        textColor={{color}}
+        textColor={{ color }}
       />
     );
   };

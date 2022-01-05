@@ -3,7 +3,7 @@ import {
   deleteEvent,
   deleteEventFromUsersHostedEvents,
   deleteEventFromUsersRequestedEvents,
-} from "../../utils/utils";
+} from "../../utils/firebaseUtils";
 
 export type navigationWithEventId = {
   eventId: string;

@@ -13,7 +13,7 @@ import {
   addNewEvent,
   addNewChatroom,
   addNewEventToCurrentUserProfile,
-} from "../../utils/utils";
+} from "../../utils/firebaseUtils";
 import { UserContext } from "../../contexts/UserContext";
 import { styles } from "./AddEvent.style";
 import { Picker } from "@react-native-picker/picker";

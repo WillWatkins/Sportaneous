@@ -2,7 +2,11 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React, { useContext } from "react";
 import { styles } from "./SingleEvent.style";
 import { UserContext } from "../../contexts/UserContext";
-import { getUserById, joinEvent, removeSelfFromEvent } from "../../utils/utils";
+import {
+  getUserById,
+  joinEvent,
+  removeSelfFromEvent,
+} from "../../utils/firebaseUtils";
 import {
   checkAcceptedOrRequested,
   deleteEventAndCascade,

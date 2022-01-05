@@ -6,10 +6,10 @@ import {
   selectEventById,
   removeAttendee,
   addAttendee,
-} from "../../utils/utils";
+} from "../../utils/firebaseUtils";
 import React from "react";
 
-export const AcceptReject = ({ route, navigation }) => {
+export const AcceptReject = ({ route, navigation }: any) => {
   const { eventId, eventTitle } = route.params;
   const [selectedId, setSelectedId] = React.useState(null);
   const [pendingUsers, setPendingUsers] = React.useState([]);
@@ -18,17 +18,19 @@ export const AcceptReject = ({ route, navigation }) => {
 
   React.useEffect(() => {
     selectEventById(eventId).then((res) => {
-      if (res.pending_attendees.length > 0) {
-        let pendingUsersNoEmpties = res.pending_attendees.filter((user) => {
-          return user !== "";
-        });
+      if (res?.pending_attendees.length > 0) {
+        let pendingUsersNoEmpties = res?.pending_attendees.filter(
+          (user: any) => {
+            return user !== "";
+          }
+        );
         setPendingUsers(pendingUsersNoEmpties);
       } else {
         setPendingUsers([]);
       }
 
-      if (res.attendees.length > 0) {
-        let usersNoEmpties = res.attendees.filter((user) => {
+      if (res?.attendees.length > 0) {
+        let usersNoEmpties = res?.attendees.filter((user: any) => {
           return user !== "";
         });
         setAttendingUsers(usersNoEmpties);
@@ -38,14 +40,14 @@ export const AcceptReject = ({ route, navigation }) => {
     });
   }, [eventId, reloadTrigger]);
 
-  const usernamecomponent = (item) => {
+  const usernamecomponent = (item: any) => {
     return (
       <Text style={styles.name}>
         {item.first_name} {item.last_name}
       </Text>
     );
   };
-  const navigateComponent = (item) => {
+  const navigateComponent = (item: any) => {
     return (
       <Pressable
         style={styles.navigate}
@@ -62,7 +64,7 @@ export const AcceptReject = ({ route, navigation }) => {
     );
   };
 
-  const AttendeesItem = ({ item }) => (
+  const AttendeesItem = ({ item }: any) => (
     <View style={styles.item}>
       {usernamecomponent(item)}
       <Pressable
@@ -85,7 +87,7 @@ export const AcceptReject = ({ route, navigation }) => {
     </View>
   );
 
-  const PendingAttendeesItem = ({ item }) => (
+  const PendingAttendeesItem = ({ item }: any) => (
     <View style={styles.item}>
       {usernamecomponent(item)}
       <Pressable
@@ -108,11 +110,11 @@ export const AcceptReject = ({ route, navigation }) => {
     </View>
   );
 
-  const renderPendingItem = ({ item }) => {
+  const renderPendingItem = ({ item }: any) => {
     return <PendingAttendeesItem item={item} />;
   };
 
-  const renderAttendingItem = ({ item }) => {
+  const renderAttendingItem = ({ item }: any) => {
     return <AttendeesItem item={item} />;
   };
 

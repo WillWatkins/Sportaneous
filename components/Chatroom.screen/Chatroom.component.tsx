@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { selectAllEvents, getUsers } from "../../utils/utils";
+import { selectAllEvents, getUsers } from "../../utils/firebaseUtils";
 import { makeNameIdReference } from "../Events.screen/utils/EventListUtils";
 import styles from "./Chatroom.style";
 

@@ -9,7 +9,7 @@ import {
   getUsers,
   selectAllEvents,
   selectEventById,
-} from "../../../../utils/utils";
+} from "../../../../utils/firebaseUtils";
 import {
   makeNameIdReference,
   truncate,

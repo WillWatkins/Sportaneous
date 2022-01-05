@@ -1,7 +1,7 @@
 // Set events from api call to events data
 // setEvents();
 
-import {getUsers} from "../../../utils/utils";
+import { getUsers } from "../../../utils/firebaseUtils";
 
 // Utils Function for truncating a string and appending ...
 export const truncate = (string: string) => {

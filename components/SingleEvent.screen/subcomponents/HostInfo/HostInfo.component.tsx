@@ -2,7 +2,7 @@ import { View, Text, Image } from "react-native";
 import { styles } from "./HostInfo.style";
 import React, { useEffect, useState } from "react";
 import { props } from "../../singleEvent.utils";
-import { getUserById } from "../../../../utils/utils";
+import { getUserById } from "../../../../utils/firebaseUtils";
 
 export const HostInfo = ({ hostDetails }: props) => {
   const [imgURL, setImgURL] = useState("");

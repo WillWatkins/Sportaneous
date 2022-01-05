@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, View, Text } from "react-native";
-import { selectAllEvents } from "../../utils/utils";
+import { selectAllEvents } from "../../utils/firebaseUtils";
 import { styles } from "./Filter.style";
 import { resetSelection } from "./utils/FilterUtils";
 

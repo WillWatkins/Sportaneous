@@ -1,5 +1,5 @@
 import { Alert } from "react-native";
-import { removeSelfFromEvent } from "./utils";
+import { removeSelfFromEvent } from "./firebaseUtils";
 import { deleteEventAndCascade } from "../components/SingleEvent.screen/singleEvent.utils";
 
 export const confirmDelete = (eventId, { navigation }, user_id, eventDetails) =>

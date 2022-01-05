@@ -1,12 +1,12 @@
-import {View, Text, Button, TextInput} from "react-native";
-import React, {useState} from "react";
-import {getAuth} from "firebase/auth";
-import {styles} from "./GetUserName.style";
-import {addNewUser} from "../../utils/utils";
+import { View, Text, Button, TextInput } from "react-native";
+import React, { useState } from "react";
+import { getAuth } from "firebase/auth";
+import { styles } from "./GetUserName.style";
+import { addNewUser } from "../../utils/firebaseUtils";
 
 const auth = getAuth();
 
-export const GetUserName = ({reload}: {reload: () => void}) => {
+export const GetUserName = ({ reload }: { reload: () => void }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 

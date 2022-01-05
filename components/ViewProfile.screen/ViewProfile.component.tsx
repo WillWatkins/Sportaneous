@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, Image, View, Pressable } from "react-native";
 import { styles } from "./ViewProfile.style";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { getUserById } from "../../utils/utils";
+import { getUserById } from "../../utils/firebaseUtils";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../../utils/firestoreConfig.js";
 import { HostInfo } from "../SingleEvent.screen/subcomponents/HostInfo/HostInfo.component";
