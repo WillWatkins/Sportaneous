@@ -17,7 +17,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { useKeyboard } from "@react-native-community/hooks";
 import { formatTimestamp } from "../../utils/utils";
 
-export const Chat = ({ route, navigation }) => {
+export const Chat = ({ route }) => {
   const { chat_id, eventName } = route.params;
   const { currentUser } = useContext(UserContext);
   const [selectedId, setSelectedId] = React.useState(null);

@@ -11,7 +11,7 @@ import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../../utils/firestoreConfig";
 
 export const UserProfile = ({ navigation }: any) => {
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   const [imgURL, setImgURL] = useState("");
 
   //Storage Ref for IMG file
@@ -22,6 +22,11 @@ export const UserProfile = ({ navigation }: any) => {
     try {
       getDownloadURL(storageRef)
         .then((res) => {
+          setCurrentUser((user) => {
+            const updateUser = { ...user };
+            updateUser.image_bitmap = res;
+            return updateUser;
+          });
           setImgURL(res);
         })
         .catch((err) => {
@@ -30,12 +35,13 @@ export const UserProfile = ({ navigation }: any) => {
     } catch (err) {
       console.log(err);
     }
-  }, [imgURL, currentUser]);
+  }, [imgURL]);
 
+  console.log(currentUser);
   return (
     <SafeAreaView style={styles.page}>
       <ScrollView>
-        <Text style={styles.title}>Account Details</Text>
+        <Text style={styles.header}>ACCOUNT DETAILS</Text>
         <UserDetails navigation={navigation} imgURL={imgURL} />
         <MyHostedEvents user_id={currentUser.id} navigation={navigation} />
         <MyJoinedEvents user_id={currentUser.id} navigation={navigation} />

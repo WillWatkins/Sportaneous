@@ -12,12 +12,23 @@ export const styles = StyleSheet.create({
     height: 200,
     width: 200,
     alignSelf: "center",
+    marginTop: 20,
   },
   title: {
     fontWeight: "bold",
     fontSize: 20,
     alignSelf: "center",
     marginVertical: 15,
+  },
+  header: {
+    color: "#FFF",
+    fontSize: 18,
+    textAlign: "center",
+    fontWeight: "bold",
+    backgroundColor: "#323B76",
+    padding: 30,
+    width: windowWidth / 1,
+    marginBottom: 10,
   },
   detailsContainer: {
     width: windowWidth * 0.9,

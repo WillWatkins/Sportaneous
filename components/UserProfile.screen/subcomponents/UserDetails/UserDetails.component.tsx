@@ -8,8 +8,10 @@ export const UserDetails = ({ navigation, imgURL }: any) => {
 
   return (
     <View>
-      {imgURL ? <Image source={{ uri: imgURL }} style={styles.avatar} /> : null}
       <View style={styles.detailsContainer}>
+        {imgURL ? (
+          <Image source={{ uri: imgURL }} style={styles.avatar} />
+        ) : null}
         <Text
           style={styles.detailsName}
         >{`${currentUser.first_name} ${currentUser.last_name}`}</Text>

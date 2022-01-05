@@ -63,7 +63,11 @@ export const MyHostedEvents = ({ user_id, navigation }) => {
           setHostedIsCollapsed(hostedIsCollapsed === true ? false : true);
         }}
       >
-        <Text style={styles.eventHeader}>My Hosted Events</Text>
+        {hostedIsCollapsed ? (
+          <Text style={styles.eventHeader}>My Hosted Events ▼</Text>
+        ) : (
+          <Text style={styles.eventHeader}>My Hosted Events ▲</Text>
+        )}
       </Pressable>
       <ScrollView>
         <Collapsible collapsed={hostedIsCollapsed}>

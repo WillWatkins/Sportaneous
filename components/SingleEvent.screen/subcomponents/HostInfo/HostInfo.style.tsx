@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     flex: 3,
     padding: 10,
     borderRadius: 10,
-    marginHorizontal: 25,
+    marginHorizontal: 10,
     marginTop: 10,
     marginBottom: 0,
     borderWidth: 1,

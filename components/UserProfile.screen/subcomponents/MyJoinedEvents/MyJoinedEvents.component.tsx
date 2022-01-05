@@ -16,7 +16,11 @@ export const MyJoinedEvents = ({ user_id, navigation }) => {
           setJoinedIsCollapsed(joinedIsCollapsed === true ? false : true);
         }}
       >
-        <Text style={styles.eventHeader}>My Joined Events</Text>
+        {joinedIsCollapsed ? (
+          <Text style={styles.eventHeader}>My Joined Events ▼</Text>
+        ) : (
+          <Text style={styles.eventHeader}>My Joined Events ▲</Text>
+        )}
       </Pressable>
       <ScrollView>
         <Collapsible collapsed={joinedIsCollapsed}>

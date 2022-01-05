@@ -69,7 +69,7 @@ export const MyAcceptedRequests = ({ user_id, navigation }) => {
   if (acceptedRequests.length < 1) {
     return (
       <Text style={styles.joinSubHeader}>
-        You have no accepted event requests.
+        You have no accepted event requests
       </Text>
     );
   }
