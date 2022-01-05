@@ -14,6 +14,9 @@ export const UserProfile = ({ navigation }: any) => {
   const { currentUser } = useContext(UserContext);
   const [imgURL, setImgURL] = useState("");
 
+  //Storage Ref for IMG file
+  const storageRef = ref(storage, currentUser.image_bitmap);
+
   useEffect(() => {
     //firebase storage request for IMG file
     try {
@@ -28,9 +31,6 @@ export const UserProfile = ({ navigation }: any) => {
       console.log(err);
     }
   }, [imgURL, currentUser]);
-
-  //Storage Ref for IMG file
-  const storageRef = ref(storage, currentUser.image_bitmap);
 
   return (
     <SafeAreaView style={styles.page}>
