@@ -39,3 +39,5 @@ Video Tour showing the following features:
 ![Review-user-requests-and-delete-demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/review_and_delete.gif)
 
 ![Chat-demo](https://github.com/WillWatkins/Sportaneous/blob/main/gifs/chat.gif)
+
+<img src="./gifs/events.gif" width="50%" height="50%"/>
