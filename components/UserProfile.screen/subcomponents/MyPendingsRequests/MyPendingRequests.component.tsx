@@ -67,13 +67,6 @@ export const MyPendingRequests = ({ user_id, navigation }) => {
   if (isLoading) {
     return <Text>Loading event requests ...</Text>;
   }
-  if (pendingRequests.length < 1) {
-    return (
-      <Text style={styles.joinSubHeader}>
-        You have no pending event requests.
-      </Text>
-    );
-  }
   return (
     <View>
       <Pressable
@@ -88,49 +81,54 @@ export const MyPendingRequests = ({ user_id, navigation }) => {
         )}
       </Pressable>
       <Collapsible collapsed={requestedIsCollapsed}>
-        <Text style={styles.joinSubHeader}>Pending Join Requests</Text>
-        {pendingRequests.map((myEvent) => {
-          return (
-            <View style={styles.container} key={myEvent.id}>
-              <TouchableOpacity
-                style={styles.item}
-                onPress={() => {
-                  navigation.navigate("Event", { eventId: myEvent.id });
-                }}
-              >
-                <Text style={styles.title}>{myEvent.title}</Text>
-                <Text style={styles.user}>{userNames[myEvent.host_id]}</Text>
-                <Text style={styles.location}>{myEvent.location}</Text>
-                <Text style={styles.date}>{myEvent.date}</Text>
-                <Text style={styles.category}>{myEvent.category}</Text>
-                <Text style={styles.time}>{myEvent.time}</Text>
-                <Text style={styles.description}>
-                  {truncate(myEvent.description)}
-                </Text>
-              </TouchableOpacity>
-              <Pressable
-                style={({ pressed }) => [
-                  {
-                    backgroundColor: pressed
-                      ? "rgba(108, 93, 171, 0.5)"
-                      : "rgba(108, 93, 171, 1)",
-                  },
-                  styles.requestsButton,
-                ]}
-                onPress={() => {
-                  const userInfo = {
-                    first_name: currentUser.first_name,
-                    last_name: currentUser.last_name,
-                    userId: currentUser.id,
-                  };
-                  confirmLeave(userInfo, myEvent.id);
-                }}
-              >
-                <Text style={styles.buttonTitle}>Cancel Request</Text>
-              </Pressable>
-            </View>
-          );
-        })}
+        {pendingRequests.length < 1 ? (
+          <Text style={styles.joinSubHeader}>
+            You have no pending event requests.
+          </Text>
+        ) : (
+          pendingRequests.map((myEvent) => {
+            return (
+              <View style={styles.container} key={myEvent.id}>
+                <TouchableOpacity
+                  style={styles.item}
+                  onPress={() => {
+                    navigation.navigate("Event", { eventId: myEvent.id });
+                  }}
+                >
+                  <Text style={styles.title}>{myEvent.title}</Text>
+                  <Text style={styles.user}>{userNames[myEvent.host_id]}</Text>
+                  <Text style={styles.location}>{myEvent.location}</Text>
+                  <Text style={styles.date}>{myEvent.date}</Text>
+                  <Text style={styles.category}>{myEvent.category}</Text>
+                  <Text style={styles.time}>{myEvent.time}</Text>
+                  <Text style={styles.description}>
+                    {truncate(myEvent.description)}
+                  </Text>
+                </TouchableOpacity>
+                <Pressable
+                  style={({ pressed }) => [
+                    {
+                      backgroundColor: pressed
+                        ? "rgba(108, 93, 171, 0.5)"
+                        : "rgba(108, 93, 171, 1)",
+                    },
+                    styles.requestsButton,
+                  ]}
+                  onPress={() => {
+                    const userInfo = {
+                      first_name: currentUser.first_name,
+                      last_name: currentUser.last_name,
+                      userId: currentUser.id,
+                    };
+                    confirmLeave(userInfo, myEvent.id);
+                  }}
+                >
+                  <Text style={styles.buttonTitle}>Cancel Request</Text>
+                </Pressable>
+              </View>
+            );
+          })
+        )}
       </Collapsible>
     </View>
   );

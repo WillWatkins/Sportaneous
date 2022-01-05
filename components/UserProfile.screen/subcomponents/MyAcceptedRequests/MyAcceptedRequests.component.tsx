@@ -64,13 +64,6 @@ export const MyAcceptedRequests = ({ user_id, navigation }) => {
   if (isLoading) {
     return <Text>Loading joined events ...</Text>;
   }
-  if (acceptedRequests.length < 1) {
-    return (
-      <Text style={styles.joinSubHeader}>
-        You have no accepted event requests
-      </Text>
-    );
-  }
   return (
     <View>
       <Pressable
@@ -85,49 +78,54 @@ export const MyAcceptedRequests = ({ user_id, navigation }) => {
         )}
       </Pressable>
       <Collapsible collapsed={acceptedIsCollapsed}>
-        <Text style={styles.joinSubHeader}>Accepted Join Requests</Text>
-        {acceptedRequests.map((myEvent) => {
-          return (
-            <View style={styles.container}>
-              <TouchableOpacity
-                style={styles.item}
-                onPress={() => {
-                  navigation.navigate("Event", { eventId: myEvent.id });
-                }}
-              >
-                <Text style={styles.title}>{myEvent.title}</Text>
-                <Text style={styles.user}>{userNames[myEvent.host_id]}</Text>
-                <Text style={styles.location}>{myEvent.location}</Text>
-                <Text style={styles.date}>{myEvent.date}</Text>
-                <Text style={styles.category}>{myEvent.category}</Text>
-                <Text style={styles.time}>{myEvent.time}</Text>
-                <Text style={styles.description}>
-                  {truncate(myEvent.description)}
-                </Text>
-              </TouchableOpacity>
-              <Pressable
-                style={({ pressed }) => [
-                  {
-                    backgroundColor: pressed
-                      ? "rgba(108, 93, 171, 0.5)"
-                      : "rgba(108, 93, 171, 1)",
-                  },
-                  styles.requestsButton,
-                ]}
-                onPress={() => {
-                  const userInfo = {
-                    first_name: currentUser.first_name,
-                    last_name: currentUser.last_name,
-                    userId: currentUser.id,
-                  };
-                  confirmLeave(userInfo, myEvent.id);
-                }}
-              >
-                <Text style={styles.buttonTitle}>Leave Event</Text>
-              </Pressable>
-            </View>
-          );
-        })}
+        {acceptedRequests.length < 1 ? (
+          <Text style={styles.joinSubHeader}>
+            You have no accepted event requests
+          </Text>
+        ) : (
+          acceptedRequests.map((myEvent) => {
+            return (
+              <View style={styles.container}>
+                <TouchableOpacity
+                  style={styles.item}
+                  onPress={() => {
+                    navigation.navigate("Event", { eventId: myEvent.id });
+                  }}
+                >
+                  <Text style={styles.title}>{myEvent.title}</Text>
+                  <Text style={styles.user}>{userNames[myEvent.host_id]}</Text>
+                  <Text style={styles.location}>{myEvent.location}</Text>
+                  <Text style={styles.date}>{myEvent.date}</Text>
+                  <Text style={styles.category}>{myEvent.category}</Text>
+                  <Text style={styles.time}>{myEvent.time}</Text>
+                  <Text style={styles.description}>
+                    {truncate(myEvent.description)}
+                  </Text>
+                </TouchableOpacity>
+                <Pressable
+                  style={({ pressed }) => [
+                    {
+                      backgroundColor: pressed
+                        ? "rgba(108, 93, 171, 0.5)"
+                        : "rgba(108, 93, 171, 1)",
+                    },
+                    styles.requestsButton,
+                  ]}
+                  onPress={() => {
+                    const userInfo = {
+                      first_name: currentUser.first_name,
+                      last_name: currentUser.last_name,
+                      userId: currentUser.id,
+                    };
+                    confirmLeave(userInfo, myEvent.id);
+                  }}
+                >
+                  <Text style={styles.buttonTitle}>Leave Event</Text>
+                </Pressable>
+              </View>
+            );
+          })
+        )}
       </Collapsible>
     </View>
   );

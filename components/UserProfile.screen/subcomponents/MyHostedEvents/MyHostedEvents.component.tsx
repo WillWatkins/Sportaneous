@@ -71,7 +71,9 @@ export const MyHostedEvents = ({ user_id, navigation }) => {
       </Pressable>
       <ScrollView>
         <Collapsible collapsed={hostedIsCollapsed}>
-          {myHostedEvents.length > 0 ? (
+          {myHostedEvents.length < 1 ? (
+            <Text style={styles.joinSubHeader}>You have no hosted events</Text>
+          ) : (
             myHostedEvents.map((myEvent) => {
               return (
                 <View style={styles.container} key={myEvent.id}>
@@ -134,8 +136,6 @@ export const MyHostedEvents = ({ user_id, navigation }) => {
                 </View>
               );
             })
-          ) : (
-            <Text style={styles.joinSubHeader}>You have no hosted events</Text>
           )}
         </Collapsible>
       </ScrollView>
