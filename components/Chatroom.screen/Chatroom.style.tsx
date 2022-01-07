@@ -1,18 +1,18 @@
-import {StyleSheet, Dimensions} from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 const windowWidth = Dimensions.get("window").width;
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     backgroundColor: "#323B76",
-    padding: 20
+    padding: 20,
   },
   header: {
-    color: '#FFF',
+    color: "#FFF",
     fontSize: 18,
-    textAlign: 'center',
+    textAlign: "center",
     fontWeight: "bold",
     marginBottom: 10,
     backgroundColor: "#323B76",
@@ -34,12 +34,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderColor: "#FFF",
     borderWidth: 1,
-    borderBottomColor: '#DADBDF',
-    borderTopColor: '#DADBDF',
-    borderRadius: 5
+    borderBottomColor: "#DADBDF",
+    borderTopColor: "#DADBDF",
+    borderRadius: 5,
   },
   image: {
-    width: 46, 
+    width: 46,
     height: 46,
   },
   title: {
@@ -49,23 +49,21 @@ const styles = StyleSheet.create({
     width: windowWidth / 1.6,
     textAlign: "right",
     paddingRight: 20,
-    color: 'black'
+    color: "black",
   },
   date: {
     textAlign: "right",
     fontSize: 17,
     width: windowWidth / 1.15,
-    color: 'grey',
+    color: "grey",
     paddingRight: 20,
-    paddingBottom: 3
+    paddingBottom: 3,
   },
   host: {
-    textAlign: "right", 
-    fontSize: 16, 
+    textAlign: "right",
+    fontSize: 16,
     width: windowWidth / 1.15,
-    color: 'grey',
-    paddingRight: 20
+    color: "grey",
+    paddingRight: 20,
   },
 });
-
-export default styles;

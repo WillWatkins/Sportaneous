@@ -9,24 +9,24 @@ import {
 } from "react-native";
 import { selectAllEvents, getUsers } from "../../utils/firebaseUtils";
 import { makeNameIdReference } from "../Events.screen/utils/EventListUtils";
-import styles from "./Chatroom.style";
+import { styles } from "./Chatroom.style";
+import { eventDetails, props, userDetails } from "./Chatroom.utils";
 
-const Chatroom = ({ navigation }) => {
+const Chatroom = ({ navigation }: props) => {
   const { currentUser } = useContext(UserContext);
-  const [selectedId, setSelectedId] = useState(null);
-  const [events, setEvents] = React.useState();
-  const [userNames, setUserNames] = React.useState({});
+  const [events, setEvents] = useState<eventDetails[]>();
+  const [userNames, setUserNames] = useState({});
 
   useEffect(() => {
     selectAllEvents().then((res) => {
-      const filteredEvents = res.filter((event: any) => {
+      const filteredEvents = res.filter((event: eventDetails) => {
         let attendeeList = event.attendees;
         let returnValue = false;
         if (attendeeList.length > 0) {
           if (event.host_id === currentUser.id) {
             returnValue = true;
           }
-          attendeeList.forEach((personDetails) => {
+          attendeeList.forEach((personDetails: userDetails) => {
             if (personDetails.userId === currentUser.id) {
               returnValue = true;
             }
@@ -41,18 +41,20 @@ const Chatroom = ({ navigation }) => {
     });
   }, []);
 
-  const Item = ({ item, onPress }) => (
-    <TouchableOpacity onPress={onPress} style={styles.item}>
-      <Image style={styles.image} source={require("./images/chat.png")} />
-      <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.date}>
-        {item.date} @ {item.time}
-      </Text>
-      <Text style={styles.host}>Hosted by: {userNames[item.host_id]}</Text>
-    </TouchableOpacity>
-  );
+  const Item = ({ item, onPress }: { item: eventDetails; onPress: any }) => {
+    return (
+      <TouchableOpacity onPress={onPress} style={styles.item}>
+        <Image style={styles.image} source={require("./images/chat.png")} />
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.date}>
+          {item.date} @ {item.time}
+        </Text>
+        <Text style={styles.host}>Hosted by: {userNames[item.host_id]}</Text>
+      </TouchableOpacity>
+    );
+  };
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }: { item: eventDetails }) => {
     return (
       <Item
         item={item}
@@ -73,7 +75,6 @@ const Chatroom = ({ navigation }) => {
         data={events}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        extraData={selectedId}
       />
     </SafeAreaView>
   );
