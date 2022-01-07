@@ -36,7 +36,6 @@ export const EventList = ({ navigation }: props) => {
     });
     getUsers().then((res) => {
       setUserNames(makeNameIdReference(res));
-      console.log(userNames);
     });
   }, []);
 

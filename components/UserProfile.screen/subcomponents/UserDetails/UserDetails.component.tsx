@@ -2,8 +2,9 @@ import { styles } from "../../UserDetails.style";
 import { Image, View, Text, Pressable } from "react-native";
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../../../contexts/UserContext";
+import { props } from "../../UserProfile.utils";
 
-export const UserDetails = ({ navigation, imgURL }: any) => {
+export const UserDetails = ({ navigation }: props) => {
   const { currentUser } = useContext(UserContext);
 
   useEffect(() => {}, [currentUser]);

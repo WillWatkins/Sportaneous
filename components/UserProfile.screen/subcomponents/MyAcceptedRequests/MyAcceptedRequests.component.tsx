@@ -13,22 +13,24 @@ import {
 import { styles } from "../../ProfileEvents.style";
 import { confirmLeave } from "../../../../utils/ProfileUtils";
 import Collapsible from "react-native-collapsible";
+import { props, event } from "../../UserProfile.utils";
 
-export const MyAcceptedRequests = ({ user_id, navigation }) => {
+export const MyAcceptedRequests = ({ user_id, navigation }: props) => {
   const { currentUser } = useContext(UserContext);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [userNames, setUserNames] = useState({});
-  const [acceptedRequestIds, setAcceptedRequestIds] = useState([]);
-  const [acceptedIsCollapsed, setAcceptedIsCollapsed] = useState(true);
-  const [acceptedRequests, setAcceptedRequests] = useState([
+  const [acceptedRequestIds, setAcceptedRequestIds] = useState<string[]>([]);
+  const [acceptedIsCollapsed, setAcceptedIsCollapsed] = useState<boolean>(true);
+  const [acceptedRequests, setAcceptedRequests] = useState<event[]>([
     {
-      title: "dummy",
-      host_id: "dummy",
-      location: "dummy",
-      date: "dummy",
-      category: "dummy",
-      time: "dummy",
-      description: "dummy",
+      title: "",
+      host_id: "",
+      location: "",
+      date: "",
+      category: "",
+      time: "",
+      description: "",
+      id: "",
     },
   ]);
 
@@ -36,8 +38,8 @@ export const MyAcceptedRequests = ({ user_id, navigation }) => {
     const eventPromises: any = acceptedRequestIds.map((eventId) => {
       return selectEventById(eventId);
     });
-    Promise.all(eventPromises).then((res: any) => {
-      res.forEach((event, index) => {
+    Promise.all(eventPromises).then((res: event[]) => {
+      res.forEach((event: event, index: number) => {
         event.id = acceptedRequestIds[index];
       });
 

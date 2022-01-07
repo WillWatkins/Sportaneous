@@ -1,5 +1,4 @@
 export const formatTimestamp = (timestamp: number) => {
-  console.log(typeof timestamp);
   let date: Date = new Date(timestamp * 1000);
   let datevalues = {
     fullYear: String(date.getFullYear()),
