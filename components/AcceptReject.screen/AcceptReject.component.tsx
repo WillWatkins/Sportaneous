@@ -7,21 +7,22 @@ import {
   removeAttendee,
   addAttendee,
 } from "../../utils/firebaseUtils";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { props, userNameAndId } from "./AcceptReject.utils";
 
-export const AcceptReject = ({ route, navigation }: any) => {
+export const AcceptReject = ({ route, navigation }: props) => {
   const { eventId, eventTitle } = route.params;
-  const [selectedId, setSelectedId] = React.useState(null);
-  const [pendingUsers, setPendingUsers] = React.useState([]);
-  const [attendingUsers, setAttendingUsers] = React.useState([]);
-  const [reloadTrigger, setReloadTrigger] = React.useState(0);
+  const [selectedId, setSelectedId] = useState(null);
+  const [pendingUsers, setPendingUsers] = useState([]);
+  const [attendingUsers, setAttendingUsers] = useState([]);
+  const [reloadTrigger, setReloadTrigger] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     selectEventById(eventId).then((res) => {
       if (res?.pending_attendees.length > 0) {
         let pendingUsersNoEmpties = res?.pending_attendees.filter(
-          (user: any) => {
-            return user !== "";
+          (user: userNameAndId) => {
+            if (user.userId !== "") return user;
           }
         );
         setPendingUsers(pendingUsersNoEmpties);
@@ -30,8 +31,8 @@ export const AcceptReject = ({ route, navigation }: any) => {
       }
 
       if (res?.attendees.length > 0) {
-        let usersNoEmpties = res?.attendees.filter((user: any) => {
-          return user !== "";
+        let usersNoEmpties = res?.attendees.filter((user: userNameAndId) => {
+          if (user.userId !== "") return user;
         });
         setAttendingUsers(usersNoEmpties);
       } else {
@@ -40,14 +41,14 @@ export const AcceptReject = ({ route, navigation }: any) => {
     });
   }, [eventId, reloadTrigger]);
 
-  const usernamecomponent = (item: any) => {
+  const usernamecomponent = (item: userNameAndId) => {
     return (
       <Text style={styles.name}>
         {item.first_name} {item.last_name}
       </Text>
     );
   };
-  const navigateComponent = (item: any) => {
+  const navigateComponent = (item: userNameAndId) => {
     return (
       <Pressable
         style={styles.navigate}
@@ -64,7 +65,7 @@ export const AcceptReject = ({ route, navigation }: any) => {
     );
   };
 
-  const AttendeesItem = ({ item }: any) => (
+  const AttendeesItem = ({ item }: { item: userNameAndId }) => (
     <View style={styles.item}>
       {usernamecomponent(item)}
       <Pressable
@@ -87,7 +88,7 @@ export const AcceptReject = ({ route, navigation }: any) => {
     </View>
   );
 
-  const PendingAttendeesItem = ({ item }: any) => (
+  const PendingAttendeesItem = ({ item }: { item: userNameAndId }) => (
     <View style={styles.item}>
       {usernamecomponent(item)}
       <Pressable
@@ -110,11 +111,11 @@ export const AcceptReject = ({ route, navigation }: any) => {
     </View>
   );
 
-  const renderPendingItem = ({ item }: any) => {
+  const renderPendingItem = ({ item }: { item: userNameAndId }) => {
     return <PendingAttendeesItem item={item} />;
   };
 
-  const renderAttendingItem = ({ item }: any) => {
+  const renderAttendingItem = ({ item }: { item: userNameAndId }) => {
     return <AttendeesItem item={item} />;
   };
 
