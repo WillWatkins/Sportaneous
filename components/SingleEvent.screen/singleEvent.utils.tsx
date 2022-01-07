@@ -9,17 +9,6 @@ export type navigationWithEventId = {
   eventId: string;
 };
 
-export type props = {
-  navigation?: {
-    navigate: (component: string, event_id?: navigationWithEventId) => {};
-  };
-  route?: {
-    params: { eventId: string };
-  };
-  hostDetails?: hostDetails;
-  eventDetails?: eventDetails;
-};
-
 export type hostDetails = {
   first_name: string;
   last_name: string;
@@ -27,17 +16,39 @@ export type hostDetails = {
   image_bitmap: string;
   id: string;
 };
+
+type attendess = {
+  first_name: String;
+  last_name: String;
+  userId: String;
+};
 export type eventDetails = {
-  attendees: string[];
+  attendees: attendess[];
   category: string;
   date: string;
   description: string;
   host_id: string;
   location: string;
   max_capacity: string;
-  pending_attendees: string[];
+  pending_attendees: attendess[];
   title: String;
   time: string;
+};
+
+export type props = {
+  navigation?: {
+    navigate: (component: string, eventId?: navigationWithEventId) => {};
+  };
+  route?: {
+    params: { eventId: string };
+  };
+  eventDetails?: eventDetails;
+  hostDetails?: hostDetails;
+};
+
+export type doc = {
+  data: () => { eventDetails: eventDetails };
+  exists: () => boolean;
 };
 
 export function checkAcceptedOrRequested(

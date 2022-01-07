@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { styles } from "./SingleEvent.style";
 import { UserContext } from "../../contexts/UserContext";
 import {
@@ -21,8 +21,9 @@ import { db } from "../../utils/firestoreConfig";
 import { EventInfo } from "./subcomponents/EventInfo/EventInfo.component";
 import { HostInfo } from "./subcomponents/HostInfo/HostInfo.component";
 
-export const SingleEvent = ({ navigation, route }: props) => {
-  let { eventId } = route!.params;
+export const SingleEvent = (props: props) => {
+  const { navigation } = props;
+  const { eventId } = props!.route!.params;
   const { currentUser } = useContext(UserContext);
 
   const dummyDetails = {
@@ -37,11 +38,9 @@ export const SingleEvent = ({ navigation, route }: props) => {
     title: "Dummmy",
     time: "",
   };
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [eventDetails, setEventDetails] =
-    React.useState<eventDetails>(dummyDetails);
-
-  const [hostDetails, setHostDetails] = React.useState<hostDetails>({
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [eventDetails, setEventDetails] = useState<eventDetails>(dummyDetails);
+  const [hostDetails, setHostDetails] = useState<hostDetails>({
     first_name: "",
     last_name: "",
     description: "",
@@ -54,9 +53,9 @@ export const SingleEvent = ({ navigation, route }: props) => {
     currentUser
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsLoading(true);
-    const unsub = onSnapshot(doc(db, "events", eventId), (doc: any) => {
+    const unsub = onSnapshot(doc(db, "events", eventId), (doc: doc) => {
       if (doc.exists()) {
         setEventDetails(doc.data());
       } else {
@@ -65,7 +64,7 @@ export const SingleEvent = ({ navigation, route }: props) => {
     });
   }, [eventId]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     getUserById(eventDetails.host_id).then((user) => {
       if (user !== undefined) {
         setHostDetails({
