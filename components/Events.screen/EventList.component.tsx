@@ -6,28 +6,26 @@ import { getUsers, selectAllEvents } from "../../utils/firebaseUtils";
 import { makeNameIdReference, truncate } from "./utils/EventListUtils";
 import { RefreshEvents } from "./RefreshEvents.component";
 import EventCategories from "./utils/EventCategories.json";
+import { categoryIsChecked, props, eventDetails } from "./EventLits.utils";
 
-const EventList = ({ navigation }) => {
-  interface categoryIsChecked {
-    [category: string]: boolean;
-  }
+export const EventList = ({ navigation }: props) => {
   const [categoryIsChecked, setCategoryIsChecked] =
     useState<categoryIsChecked>(EventCategories);
-  const [isLoading, setIsLoading] = useState(true);
-  const [selectedId, setSelectedId] = useState(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [userNames, setUserNames] = useState({});
-  const [events, setEvents] = React.useState([
+  const [events, setEvents] = useState<eventDetails[]>([
     {
-      attendees: "dummy",
-      category: "dummy",
-      chat_id: "dummy",
-      date: "dummy",
-      description: "dummy",
-      host_id: 0,
-      location: "dummy",
-      max_capacity: "dummy",
-      pending_attendee: { 0: "dummy" },
-      title: "dummy",
+      attendees: [],
+      category: "",
+      date: "",
+      description: "",
+      host_id: "",
+      location: "",
+      max_capacity: "",
+      pending_attendees: [],
+      title: "",
+      time: "",
+      id: "",
     },
   ]);
 
@@ -38,33 +36,35 @@ const EventList = ({ navigation }) => {
     });
     getUsers().then((res) => {
       setUserNames(makeNameIdReference(res));
+      console.log(userNames);
     });
   }, []);
 
-  const Item = ({ item, onPress, textColor }) => (
+  const Item = ({
+    item,
+    onPress,
+  }: {
+    item: eventDetails;
+    onPress: () => {};
+  }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item]}>
       <Text style={styles.title}>{item.title}</Text>
-      <Text style={[styles.user, textColor]}>{userNames[item.host_id]}</Text>
-      <Text style={[styles.location, textColor]}>{item.location}</Text>
-      <Text style={[styles.date, textColor]}>{item.date}</Text>
-      <Text style={[styles.category, textColor]}>{item.category}</Text>
-      <Text style={[styles.time, textColor]}>{item.time}</Text>
-      <Text style={[styles.description, textColor]}>
-        {truncate(item.description)}
-      </Text>
+      <Text style={[styles.user]}>{userNames[item.host_id]}</Text>
+      <Text style={[styles.location]}>{item.location}</Text>
+      <Text style={[styles.date]}>{item.date}</Text>
+      <Text style={[styles.category]}>{item.category}</Text>
+      <Text style={[styles.time]}>{item.time}</Text>
+      <Text style={[styles.description]}>{truncate(item.description)}</Text>
     </TouchableOpacity>
   );
 
-  const renderItem = ({ item }) => {
-    const color = item.id === selectedId ? "white" : "black";
+  const renderItem = ({ item }: { item: eventDetails }) => {
     return (
       <Item
         item={item}
         onPress={() => {
-          setSelectedId(item.chat_id);
           navigation.navigate("Event", { eventId: item.id });
         }}
-        textColor={{ color }}
       />
     );
   };
@@ -87,10 +87,7 @@ const EventList = ({ navigation }) => {
         data={events}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        extraData={selectedId}
       />
     </SafeAreaView>
   );
 };
-
-export default EventList;
