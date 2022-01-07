@@ -17,17 +17,12 @@ import { useKeyboard } from "@react-native-community/hooks";
 import * as ImagePicker from "expo-image-picker";
 import { storage } from "../../utils/firestoreConfig";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { currentUser, props } from "./EditProfile.utils";
 
-type UpdateUserProps = {
-  navigation: {
-    navigate: (component: string) => {};
-  };
-};
-
-export const EditProfile = ({ navigation }: UpdateUserProps) => {
+export const EditProfile = ({ navigation }: props) => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
-  const [imgURL, setImgURL] = useState("");
-  const [userDetails, setUserDetails] = useState(currentUser);
+  const [imgURL, setImgURL] = useState<String>("");
+  const [userDetails, setUserDetails] = useState<currentUser>(currentUser);
   const windowHeight = Dimensions.get("window").height;
   const keyboard = useKeyboard();
 
