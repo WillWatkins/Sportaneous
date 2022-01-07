@@ -19,22 +19,17 @@ import { styles } from "./AddEvent.style";
 import { Picker } from "@react-native-picker/picker";
 import categories from "../Events.screen/utils/EventCategories.json";
 import { useKeyboard } from "@react-native-community/hooks";
+import { props } from "./AddEvent.utils";
 
-type AddEventProps = {
-  navigation: {
-    navigate: (component: string, {}) => {};
-  };
-};
-
-export const AddEvent = ({ navigation }: AddEventProps) => {
+export const AddEvent = ({ navigation }: props) => {
   const { currentUser } = useContext(UserContext);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [location, setLocation] = useState("");
-  const [maxCapacity, setMaxCapacity] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [maxCapacity, setMaxCapacity] = useState<string>("");
   const [date, setDate] = useState<Date>();
   const [time, setTime] = useState<Date>();
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState<string>("");
   const windowHeight = Dimensions.get("window").height;
   const keyboard = useKeyboard();
 
