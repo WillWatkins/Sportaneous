@@ -23,7 +23,7 @@ import { HostInfo } from "./subcomponents/HostInfo/HostInfo.component";
 
 export const SingleEvent = (props: props) => {
   const { navigation } = props;
-  const { eventId } = props!.route!.params;
+  const { eventId } = props.route!.params;
   const { currentUser } = useContext(UserContext);
 
   const dummyDetails = {

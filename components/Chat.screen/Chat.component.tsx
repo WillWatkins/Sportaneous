@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  Pressable,
-  Button,
-  Dimensions,
-  ScrollView,
-} from "react-native";
+import { View, Text, Pressable, Dimensions, ScrollView } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { styles } from "./chat.style";
 import { FlatList, TextInput } from "react-native-gesture-handler";
@@ -16,20 +9,21 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { UserContext } from "../../contexts/UserContext";
 import { useKeyboard } from "@react-native-community/hooks";
 import { formatTimestamp } from "../../utils/utils";
+import { ChatItem, props } from "./Chat.utils";
 
-export const Chat = ({ route }) => {
+export const Chat = ({ route }: props) => {
   const { chat_id, eventName } = route.params;
   const { currentUser } = useContext(UserContext);
-  const [selectedId, setSelectedId] = React.useState(null);
-  const [messages, setMessages] = React.useState([]);
-  const [text, setText] = React.useState("");
-  const [isMessagesEmpty, setIsMessagesEmpty] = React.useState(true);
+  const [selectedId, setSelectedId] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [text, setText] = useState<string>("");
+  const [isMessagesEmpty, setIsMessagesEmpty] = useState<boolean>(true);
   const windowHeight = Dimensions.get("window").height;
   const keyboard = useKeyboard();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMessages([]);
-    const unsub = onSnapshot(doc(db, "chats", chat_id), (doc) => {
+    const unsub = onSnapshot(doc(db, "chats", chat_id), (doc: any) => {
       if (doc.data().messages.length > 0) {
         setMessages(doc.data().messages);
         setIsMessagesEmpty(false);
@@ -40,7 +34,7 @@ export const Chat = ({ route }) => {
     });
   }, [chat_id]);
 
-  const Item = ({ item }) => (
+  const Item = ({ item }: { item: ChatItem }) => (
     <View style={styles.item}>
       <View style={styles.topRowContainer}>
         <Text style={styles.name}>{item.first_name}:</Text>
@@ -69,13 +63,10 @@ export const Chat = ({ route }) => {
       </View>
       <Text style={styles.message}>{item.message_body}</Text>
       <Text style={styles.time}>{formatTimestamp(item.timestamp.seconds)}</Text>
-      {/* ADD functionality for formatting time from api */}
     </View>
   );
-  const renderItem = ({ item }) => {
-    const backgroundColor =
-      item.id === selectedId ? "#6E3B6E" : "rgba(10,80,160, 0.1)";
-    return <Item item={item} backgroundColor={{ backgroundColor }} />;
+  const renderItem = ({ item }: { item: ChatItem }) => {
+    return <Item item={item} />;
   };
 
   const [size, setSize] = useState(windowHeight);
