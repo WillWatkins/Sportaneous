@@ -1,7 +1,7 @@
 type navigationParams = {
-  userId: String;
-  eventId: String;
-  eventTitle: String;
+  userId: string;
+  eventId: string;
+  eventTitle: string;
 };
 
 export type props = {
@@ -9,12 +9,12 @@ export type props = {
     navigate: (component: string, params?: navigationParams) => {};
   };
   route: {
-    params: { eventId: string; eventTitle: String };
+    params: { eventId: string; eventTitle: string };
   };
 };
 
 export type userNameAndId = {
-  first_name: String;
-  last_name: String;
-  userId: String;
+  first_name: string;
+  last_name: string;
+  userId: string;
 };

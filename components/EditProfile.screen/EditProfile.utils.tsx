@@ -5,12 +5,12 @@ export type props = {
 };
 
 export type currentUser = {
-  accepted_events: String[];
-  description: String;
-  first_name: String;
-  hosted_events: String[];
-  id: String;
-  image_bitmap: String;
-  last_name: String;
-  requested_events: String[];
+  accepted_events: string[];
+  description: string;
+  first_name: string;
+  hosted_events: string[];
+  id: string;
+  image_bitmap: string;
+  last_name: string;
+  requested_events: string[];
 };

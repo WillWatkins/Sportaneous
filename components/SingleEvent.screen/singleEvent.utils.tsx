@@ -18,9 +18,9 @@ export type hostDetails = {
 };
 
 type attendess = {
-  first_name: String;
-  last_name: String;
-  userId: String;
+  first_name: string;
+  last_name: string;
+  userId: string;
 };
 export type eventDetails = {
   attendees: attendess[];
@@ -31,7 +31,7 @@ export type eventDetails = {
   location: string;
   max_capacity: string;
   pending_attendees: attendess[];
-  title: String;
+  title: string;
   time: string;
 };
 

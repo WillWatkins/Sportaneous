@@ -1,13 +1,13 @@
 export type props = {
   route: {
-    params: { chat_id: String; eventName: String };
+    params: { chat_id: string; eventName: string };
   };
 };
 
 export type ChatItem = {
-  first_name: String;
-  userId: String;
-  message_body: String;
-  timestamp: { seconds: String; nanoseconds: String };
-  id: String;
+  first_name: string;
+  userId: string;
+  message_body: string;
+  timestamp: { seconds: number; nanoseconds: number };
+  id: string;
 };

@@ -8,7 +8,7 @@ export const HostInfo = ({ hostDetails }: props) => {
   const [imgURL, setImgURL] = useState("");
   useEffect(() => {
     if (hostDetails?.id !== "") {
-      getUserById(hostDetails?.id)
+      getUserById(hostDetails!.id)
         .then((hostData) => {
           setImgURL(hostData?.image_bitmap);
         })
