@@ -12,8 +12,8 @@ import { styles } from "./Splash.style";
 export const Splash = () => {
   const auth = getAuth();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [userAuth, setUserAuth] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [userAuth, setUserAuth] = useState<boolean>(false);
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
   useEffect(() => {

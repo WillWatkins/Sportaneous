@@ -7,8 +7,8 @@ import { addNewUser } from "../../utils/firebaseUtils";
 const auth = getAuth();
 
 export const GetUserName = ({ reload }: { reload: () => void }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
 
   const user = {
     first_name: firstName,
