@@ -55,7 +55,7 @@ export const SingleEvent = (props: props) => {
 
   useEffect(() => {
     setIsLoading(true);
-    const unsub = onSnapshot(doc(db, "events", eventId), (doc: doc) => {
+    const unsub = onSnapshot(doc(db, "events", eventId), (doc: any) => {
       if (doc.exists()) {
         setEventDetails(doc.data());
       } else {

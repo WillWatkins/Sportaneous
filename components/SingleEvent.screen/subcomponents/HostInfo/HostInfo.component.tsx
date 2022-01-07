@@ -1,16 +1,17 @@
 import { View, Text, Image } from "react-native";
 import { styles } from "./HostInfo.style";
 import React, { useEffect, useState } from "react";
-import { props } from "../../singleEvent.utils";
+import { hostDetails, image, props } from "../../singleEvent.utils";
 import { getUserById } from "../../../../utils/firebaseUtils";
+import { DocumentData } from "firebase/firestore";
 
 export const HostInfo = ({ hostDetails }: props) => {
   const [imgURL, setImgURL] = useState("");
   useEffect(() => {
     if (hostDetails?.id !== "") {
       getUserById(hostDetails?.id)
-        .then((userData: any) => {
-          setImgURL(userData?.image_bitmap);
+        .then((hostData) => {
+          setImgURL(hostData?.image_bitmap);
         })
         .catch((err) => {
           console.log(err);
