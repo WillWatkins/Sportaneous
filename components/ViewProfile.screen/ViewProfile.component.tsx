@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Text, Image, View, Pressable } from "react-native";
+import { Text, Pressable } from "react-native";
 import { styles } from "./ViewProfile.style";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getUserById } from "../../utils/firebaseUtils";
-import { getDownloadURL, ref } from "firebase/storage";
-import { storage } from "../../utils/firestoreConfig.js";
 import { HostInfo } from "../SingleEvent.screen/subcomponents/HostInfo/HostInfo.component";
+import { props, userDetails } from "./ViewProfile.utils";
 
-export const ViewProfile = ({ route, navigation }) => {
+export const ViewProfile = ({ route, navigation }: props) => {
   const { userId, eventId, eventTitle } = route.params;
-  const [imgURL, setImgURL] = useState("");
-  const [userImage, setUserImage] = useState(null);
-  const [userDetails, setUserDetails] = useState({
+  const [userDetails, setUserDetails] = useState<userDetails>({
     first_name: "",
     hosted_events: [],
     last_name: "",
@@ -25,13 +22,12 @@ export const ViewProfile = ({ route, navigation }) => {
   useEffect(() => {
     getUserById(userId)
       .then((userData) => {
-        setImgURL(userData?.image_bitmap);
         setUserDetails(userData);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [userImage, userId]);
+  }, [userId]);
 
   return (
     <SafeAreaView style={styles.container}>
