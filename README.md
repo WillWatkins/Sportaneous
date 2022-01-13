@@ -2,11 +2,11 @@
 
 ## Description
 
-This app allows users to create and join user created sport events. The app was created to encourage social interaction and provide an easier route to trying new sports, creating new friends and being sportaneous!
+This app allows users to create and join user-created sports events. The app was created to encourage social interaction and provide an easier route to trying new sports, creating new friends and being sportaneous!
 
 # Technologies and Packages
 
-This applciation was created using Expo, Typescript, React Native, and Firebase (auth, firestore and storage).
+This application was created using Expo, Typescript, React Native, and Firebase (auth, firestore and storage).
 
 A full list of technologies and packages used for this project can be found in the package.json file.
 
@@ -17,7 +17,7 @@ Unfortunately, this app is not hosted yet, but have a look below to see the prog
 ## Event list:
 
 - View hosted events
-- Filter by category
+- Filter by a category
 
 <img src="./gifs/events.gif" width="30%" style="margin-left; margin-right 1em;"/>
 
@@ -48,9 +48,9 @@ Unfortunately, this app is not hosted yet, but have a look below to see the prog
 
 <img src="./gifs/add_event.gif" width="30%" height="30%"/>
 
-## Review requested attendes
+## Review requested attendees
 
-- Review the user who have requested to join your event
+- Review the users who have requested to join your event
 - View their profile
 - Once approved, they are added to your event
 - Decided they're not a great fit for your event? Remove them from your event
@@ -60,7 +60,7 @@ Unfortunately, this app is not hosted yet, but have a look below to see the prog
 ## Chat
 
 - Once users are approved by you, discuss the event details in the event chatroom
-- Send and Receive messages in real time
+- Send and receive messages in real-time
 - Sent a typo? You have the option to delete your own messages
 
 <img src="./gifs/chat.gif" width="30%" height="30%"/>
